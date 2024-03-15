@@ -1,5 +1,34 @@
 #include "../minishell.h"
 
+char	**ft_split(char const *s, char c)
+{
+	int		words;
+	char	**str;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	words = count_strings(s, c);
+	str = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (*s && *s == c)
+			s++;
+		if (*s && *s != c)
+		{
+			str[i] = malloc_strings(s, c);
+			i++;
+			while (*s && *s != c)
+				s++;
+		}
+	}
+	str[i] = NULL;
+	return (str);
+}
+
 int	count_strings(char const *s, char c)
 {
 	int	i;
@@ -40,34 +69,6 @@ char	*malloc_strings(const char *s, char c)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
-{
-	int		words;
-	char	**str;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	words = count_strings(s, c);
-	str = (char **)malloc(sizeof(char *) * (words + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		while (*s && *s == c)
-			s++;
-		if (*s && *s != c)
-		{
-			str[i] = malloc_strings(s, c);
-			i++;
-			while (*s && *s != c)
-				s++;
-		}
-	}
-	str[i] = NULL;
-	return (str);
-}
 
 
 void	free_split(char **split)

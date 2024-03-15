@@ -1,5 +1,5 @@
 FLAGS = -g -Wall -Wextra -Werror 
-SRC = minishell.c ./utils/split.c
+SRC = minishell.c ./utils/split.c ./utils/ft_libft.c
 
 OBJ = $(SRC:.c=.o)
 NAME = minishell

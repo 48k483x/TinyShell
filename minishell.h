@@ -21,4 +21,16 @@
 #include <readline/history.h>
 
 
-#endif // MINISHELL_H
+/* functions of lib_ft utils*/
+char *_strcat(char *dest, char *src);
+char	**ft_split(char const *s, char c);
+
+/* Split Utils */
+int	count_strings(char const *s, char c);
+char	*malloc_strings(const char *s, char c);
+
+/* Free Utils */
+void	free_split(char **split);
+
+
+#endif // MINI_SHELL_H
