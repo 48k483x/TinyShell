@@ -5,6 +5,8 @@ size_t    _strlen(const char *s)
     size_t	i;
 
     i = 0;
+    if (!s)
+        return (0);
     while (s[i])
         i++;
     return (i);
@@ -17,6 +19,8 @@ char *_strcat(char *dest, char *src)
     char *cat;
     int len;
 
+    if (!dest || !src)
+        return (NULL);
     len = _strlen(dest) + _strlen(src);
     cat = malloc(sizeof(char *) * (len + 1));
     if (!cat)

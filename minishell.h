@@ -32,5 +32,7 @@ char	*malloc_strings(const char *s, char c);
 /* Free Utils */
 void	free_split(char **split);
 
+/* Error Handling functions */
+void cmd_not_found(char *cmd, char **s, char *line, char *path);
 
 #endif // MINI_SHELL_H
