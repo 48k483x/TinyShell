@@ -1,4 +1,4 @@
-FLAGS = -g -Wall -Wextra -Werror -lreadline
+FLAGS = -g -Wall -Wextra -Werror 
 SRC = minishell.c ./utils/split.c
 
 OBJ = $(SRC:.c=.o)
@@ -7,7 +7,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@cc $(FLAGS) $(OBJ) -o $(NAME)
+	@cc $(FLAGS) $(OBJ) -o $(NAME) -lreadline
 
 %.o: %.c
 	@cc $(FLAGS) -c $< -o $@
