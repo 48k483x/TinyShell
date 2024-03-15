@@ -40,7 +40,7 @@ int main(int ac, char **av)
             free(line);
             break;
         }
-        printf("%s", line);
+        printf("%s\n", line);
     }
 }
 
