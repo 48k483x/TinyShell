@@ -40,7 +40,13 @@ int main(int ac, char **av)
             free(line);
             break;
         }
-        printf("%s\n", line);
+        if (strcmp(line, "") == 0)
+        {
+            free(line);
+            continue;
+        }
+        else
+            printf("%s\n", line);
     }
 }
 
