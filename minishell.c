@@ -12,6 +12,7 @@ int main()
 
     while (1)
     {
+        signal(SIGINT, sig_handler);
         tiny.line = readline(initialise_prompt(&tiny));
         if (tiny.line)
         {

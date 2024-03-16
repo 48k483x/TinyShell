@@ -56,5 +56,6 @@ void cmd_not_found(char *cmd, char **s, char *line, char *path);
 char *get_name();
 char *initialise_prompt(t_tiny *tiny);
 void path_checker(t_tiny *tiny);
-
+/* Signal */
+void    sig_handler(int signum);
 #endif // MINI_SHELL_H
