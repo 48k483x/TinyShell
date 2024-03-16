@@ -14,7 +14,7 @@ char *initialise_prompt(t_tiny *tiny)
 void path_checker(t_tiny *tiny)
 {
     if (!tiny->line)
-        printf("Error: No command entered\n");
+        return ;
     tiny->s = _split(tiny->line, ' ');
     tiny->env = _split(getenv("PATH"), ':');
     if (access(tiny->s[0], X_OK) == 0)
@@ -31,7 +31,7 @@ void path_checker(t_tiny *tiny)
             tiny->i++;
             // free(tiny->path);
         }
-        if (tiny->path == NULL || access(tiny->path, X_OK) != 0)
-            cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);
+        // if (tiny->path == NULL || access(tiny->path, X_OK) != 0)
+        //     cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);
     }
 }

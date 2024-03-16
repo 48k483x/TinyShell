@@ -14,7 +14,10 @@ int main()
     {
         tiny.line = readline(initialise_prompt(&tiny));
         if (tiny.line)
+        {
             path_checker(&tiny);
+            add_history(tiny.line);
+        }
         tiny.pid = fork();
         if (tiny.pid == 0)
             execve_error(&tiny);
