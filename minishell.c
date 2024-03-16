@@ -14,6 +14,8 @@ int main()
     {
         signal(SIGINT, sig_handler);
         tiny.line = readline(initialise_prompt(&tiny));
+        if (!tiny.line || strlen(tiny.line) == 0)
+            continue;
         if (tiny.line)
         {
             path_checker(&tiny);
