@@ -27,8 +27,11 @@ void path_checker(t_tiny *tiny)
             tiny->path = _strcat(tiny->env[tiny->i], "/");
             tiny->path = _strcat(tiny->path, tiny->s[0]);
             if (access(tiny->path, X_OK) == 0)
-                break;
+                break ;
             tiny->i++;
+            // free(tiny->path);
         }
+        if (tiny->path == NULL || access(tiny->path, X_OK) != 0)
+            cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);
     }
 }

@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+void execve_error(t_tiny *tiny)
+{
+    if ((execve(tiny->path, tiny->s, NULL) == -1))
+        cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);
+}
+
 int main()
 {
     t_tiny tiny;
@@ -9,10 +15,9 @@ int main()
         tiny.line = readline(initialise_prompt(&tiny));
         if (tiny.line)
             path_checker(&tiny);
-        printf("tiny.path: %s\n", tiny.path);
         tiny.pid = fork();
         if (tiny.pid == 0)
-            execve(tiny.path, tiny.s, NULL);
+            execve_error(&tiny);
         else
             waitpid(tiny.pid, NULL, 0);
     }   
