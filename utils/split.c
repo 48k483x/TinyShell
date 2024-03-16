@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char	**ft_split(char const *s, char c)
+char	**_split(char const *s, char c)
 {
 	int		words;
 	char	**str;

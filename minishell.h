@@ -21,9 +21,26 @@
 #include <readline/history.h>
 
 
+/* Structs of TinyShell */
+typedef struct s_tiny
+{
+    int i;
+    int j;
+    int k;
+    char *name;
+    char **env;
+    char *prompt;
+    char *path;
+    char **s;
+    char *line;
+    pid_t pid;
+}   t_tiny;
+
 /* functions of lib_ft utils*/
 char *_strcat(char *dest, char *src);
-char	**ft_split(char const *s, char c);
+char	**_split(char const *s, char c);
+int _strcmp(const char *s1, const char *s2);
+size_t    _strlen(const char *s);
 
 /* Split Utils */
 int	count_strings(char const *s, char c);
@@ -34,5 +51,10 @@ void	free_split(char **split);
 
 /* Error Handling functions */
 void cmd_not_found(char *cmd, char **s, char *line, char *path);
+
+/* Parsing function */
+char *get_name();
+char *initialise_prompt(t_tiny *tiny);
+void path_checker(t_tiny *tiny);
 
 #endif // MINI_SHELL_H
