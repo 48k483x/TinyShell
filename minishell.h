@@ -51,6 +51,7 @@ void	free_split(char **split);
 
 /* Error Handling functions */
 void cmd_not_found(char *cmd, char **s, char *line, char *path);
+void execve_error(t_tiny *tiny);
 
 /* Parsing function */
 char *get_name();
@@ -58,4 +59,10 @@ char *initialise_prompt(t_tiny *tiny);
 void path_checker(t_tiny *tiny);
 /* Signal */
 void    sig_handler(int signum);
+void sigchld_handler(int signum);
+
+/* Free */
+void _free(t_tiny *tiny);
+
+
 #endif // MINI_SHELL_H

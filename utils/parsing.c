@@ -29,9 +29,6 @@ void path_checker(t_tiny *tiny)
             if (access(tiny->path, X_OK) == 0)
                 break ;
             tiny->i++;
-            // free(tiny->path);
         }
-        // if (tiny->path == NULL || access(tiny->path, X_OK) != 0)
-        //     cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);
     }
 }

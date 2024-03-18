@@ -1,9 +1,14 @@
 #include "minishell.h"
 
-void execve_error(t_tiny *tiny)
+void _fork(t_tiny *tiny)
 {
-    if ((execve(tiny->path, tiny->s, NULL) == -1))
-        cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);
+    tiny->pid = fork();
+    if (tiny->pid < 0)
+        perror("fork");
+    if (tiny->pid == 0)
+        execve_error(tiny);
+    else
+        waitpid(tiny->pid, NULL, 0);
 }
 
 int main()
@@ -13,6 +18,7 @@ int main()
     while (1)
     {
         signal(SIGINT, sig_handler);
+        signal(SIGCHLD, sigchld_handler);
         tiny.line = readline(initialise_prompt(&tiny));
         if (!tiny.line || strlen(tiny.line) == 0)
             continue;
@@ -21,10 +27,7 @@ int main()
             path_checker(&tiny);
             add_history(tiny.line);
         }
-        tiny.pid = fork();
-        if (tiny.pid == 0)
-            execve_error(&tiny);
-        else
-            waitpid(tiny.pid, NULL, 0);
-    }   
+        _fork(&tiny);
+    }
+    _free(&tiny);
 }
