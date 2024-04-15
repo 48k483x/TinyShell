@@ -27,6 +27,9 @@ typedef struct s_tiny
     int i;
     int j;
     int k;
+    char ***cmds;
+    char **operators;
+    char **full_cmd;
     char *name;
     char **env;
     char *prompt;
@@ -35,6 +38,17 @@ typedef struct s_tiny
     char *line;
     pid_t pid;
 }   t_tiny;
+
+// typedef struct s_cmd
+// {
+//     char **cmd;
+//     char *r_input; // redirect input    |   of course a si ay_man if any
+//     char *r_output; // redirect output  |   of course a si ay_man if any
+//     char *append; // > append file      |   of course a si ay_man if any
+//     char *here_doc; // << here doc      |   of course a si ay_man if any
+//     char *pipe; // | pipe               |   of course a si ay_man if any
+//     struct  s_cmd *next;
+// }; t_cmd;
 
 /* functions of lib_ft utils*/
 char *_strcat(char *dest, char *src);
