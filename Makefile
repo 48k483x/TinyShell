@@ -1,4 +1,4 @@
-FLAGS = -Wall -Wextra -Werror -fsanitize=thread 
+FLAGS = -Wall -Wextra -Werror 
 SRC = minishell.c ./utils/split.c ./utils/ft_libft.c \
 		./utils/errors.c ./utils/parsing.c ./utils/signals.c
 
@@ -11,7 +11,7 @@ $(NAME): $(OBJ)
 	@cc $(FLAGS) $(OBJ) -o $(NAME) -lreadline
 
 %.o: %.c
-	cc $(FLAGS) -c $< -o $@
+	@cc $(FLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ) $(OBJ_BONUS)

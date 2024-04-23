@@ -53,7 +53,7 @@ void    pipe_handle(t_tiny *tiny)
     int k = 0;
     int cmd_count = 0;
 
-    char *cmd = "/bin/echo  ana | wc -l | echo yes | hello | ls";
+    char *cmd = "/bin/echo  ana | wc -l" ;
     while (cmd[i] != '\0')
     {
         if (cmd[i] == '|')
