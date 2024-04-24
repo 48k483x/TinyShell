@@ -301,10 +301,10 @@ Launch **minishell**
 
 # Authors
 
-👨 **Thomas WAGNER**
+👨 **Ayman**
 
-* Github: [@twagger](https://github.com/twagger/)
+* Github: [@twagger](https://github.com/ayman-aa/)
 
-👩 **Wen Tzu Lo**
+👩 **Abdurrahmano**
 
-* Github: [@iamwen1023](https://github.com/iamwen1023)
+* Github: [@iamwen1023](https://github.com/48k483x)
