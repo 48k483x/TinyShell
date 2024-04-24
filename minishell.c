@@ -20,7 +20,7 @@ int main()
         signal(SIGINT, sig_handler);
         signal(SIGCHLD, sigchld_handler);
         tiny.line = readline(initialise_prompt(&tiny));
-        if (!tiny.line || strlen(tiny.line) == 0)
+        if (!tiny.line || _strlen(tiny.line) == 0)
             continue;
         if (tiny.line)
         {

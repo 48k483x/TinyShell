@@ -26,20 +26,14 @@ void    copy(t_tiny *tiny)
         }
         i++;
     }
-    printf("K = %d\n", k);
-    printf("i = %d\n", i);
-    printf("j = %d\n", j);
-    printf("\nfull_cmd[%d] = %s\n\n\n", i, tiny->full_cmd[k]);
     tiny->cmds[j] = malloc(sizeof(char *) * (i - k + 1));
     if (!tiny->cmds[j])
         return ;
     while (tiny->full_cmd[k])
     {
         tiny->cmds[j][x] = strdup(tiny->full_cmd[k]);
-        printf("tiny->cmds[%d][%d] = %s\n", j, x, tiny->cmds[j][x]);
         k++;
         x++;
-        printf("k = %d\n", k);
     }
     tiny->cmds[j][x] = NULL;
     j++;
@@ -48,11 +42,8 @@ void    copy(t_tiny *tiny)
 
 void    pipe_handle(t_tiny *tiny)
 {
-    int i = 0;
-    int j = -1;
-    int k = 0;
     int cmd_count = 0;
-
+    int i = 0;
     char *cmd = "/bin/echo  ana | wc -l" ;
     while (cmd[i] != '\0')
     {
@@ -64,23 +55,6 @@ void    pipe_handle(t_tiny *tiny)
     if (!tiny->cmds)
         return ;
     tiny->full_cmd = _split(cmd, ' ');
-    i = 0;
-    while (tiny->full_cmd[i] != NULL)
-    {
-        if (_strcmp(tiny->full_cmd[i], "|") == 0)
-        {
-            while (++j < i)
-                printf("%s ", tiny->full_cmd[j]);
-            printf("\n");
-            j = i;
-        }
-        i++;
-    }
-    j++;
-    while (tiny->full_cmd[j] != NULL)
-        printf("%s ", tiny->full_cmd[j++]);
-    printf("\n");
-
     copy(tiny);
 
     for (int i = 0; tiny->cmds[i]; i++)
@@ -92,6 +66,17 @@ void    pipe_handle(t_tiny *tiny)
     }
     
 }
+
+void lexer()
+{
+    char *cmd = "echo  ana | wc -l" ;
+    int i = -1;
+    while (++i && cmd[i])
+    {
+        
+    }
+}
+
 
 void fork_s(t_tiny *tiny)
 {
@@ -107,6 +92,5 @@ int main (int ac, char **av)
     (void)ac; (void)av; t_tiny tiny;
 
     pipe_handle(&tiny);
-    
     fork_s(&tiny);
 }
