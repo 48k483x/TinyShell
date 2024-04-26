@@ -39,23 +39,20 @@ typedef struct s_tiny
     pid_t pid;
 }   t_tiny;
 
-// typedef struct s_cmd
-// {
-//     char **cmd;
-//     char *r_input; // redirect input    |   of course a si ay_man if any
-//     char *r_output; // redirect output  |   of course a si ay_man if any
-//     char *append; // > append file      |   of course a si ay_man if any
-//     char *here_doc; // << here doc      |   of course a si ay_man if any
-//     char *pipe; // | pipe               |   of course a si ay_man if any
-//     struct  s_cmd *next;
-// }; t_cmd;
+typedef struct s_cli
+{
+    char **cmd;
+    struct  s_cli *next;
+} t_cli;
 
 /* functions of lib_ft utils*/
 char *_strcat(char *dest, char *src);
 char	**_split(char const *s, char c);
 int _strcmp(const char *s1, const char *s2);
 size_t    _strlen(const char *s);
-
+void *_memcpy(void *dest, const void *src, size_t n);
+void *_realloc(void *ptr, size_t size);
+void *_malloc(size_t size);
 /* Split Utils */
 int	count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);

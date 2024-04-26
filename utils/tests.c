@@ -1,96 +1,81 @@
 #include "../minishell.h"
 
-void    copy(t_tiny *tiny)
+void print_linked_list(t_cli *cli)
+{
+    int i;
+    int j = 0;
+
+    t_cli *tmp = cli;
+    while (tmp && tmp->next)
+    {
+        i = 0;
+        while (tmp->cmd[i])
+        {
+            printf("cmd %d : ['%s']\n", j, tmp->cmd[i]);
+            i++;
+        }
+        j++;
+        printf("\n");
+        tmp = tmp->next;
+    }
+}
+
+void _copy(t_tiny *tiny, t_cli *cli)
 {
     int i = 0;
-    int j = 0;
+    int j;
     int k = 0;
-    int x = 0;
-    while (tiny->full_cmd[i] != NULL)
+
+    while (tiny->full_cmd[i] && cli)
     {
-        if (_strcmp(tiny->full_cmd[i], "|") == 0)
+        if (_strcmp(tiny->full_cmd[i], "|") == 0 || tiny->full_cmd[i + 1] == NULL)
         {
-            tiny->cmds[j] = malloc(sizeof(char **) * (i - k + 1));
-            if (!tiny->cmds[j])
-                return ;
-            while (k < i)
+            j = 0;
+            cli->cmd = _malloc(sizeof(char **) * (i - k + 1));
+            while (k <= i && _strcmp(tiny->full_cmd[k], "|") != 0)
             {
-                tiny->cmds[j][x] = strdup(tiny->full_cmd[k]);
+                cli->cmd[j] = strdup(tiny->full_cmd[k]);
                 k++;
-                x++;
+                j++;
             }
-            tiny->cmds[j][x] = NULL;
-            j++;
+            cli->cmd[j] = NULL;
             k = i + 1;
-            x = 0;
+            cli->next = _malloc(sizeof(t_cli));
+            cli = cli->next;
         }
         i++;
     }
-    tiny->cmds[j] = malloc(sizeof(char *) * (i - k + 1));
-    if (!tiny->cmds[j])
-        return ;
-    while (tiny->full_cmd[k])
-    {
-        tiny->cmds[j][x] = strdup(tiny->full_cmd[k]);
-        k++;
-        x++;
-    }
-    tiny->cmds[j][x] = NULL;
-    j++;
-    tiny->cmds[j] = NULL;
+    cli->next = NULL;
 }
 
-void    pipe_handle(t_tiny *tiny)
+void    pipe_handle(t_tiny *tiny, t_cli *cli)
 {
     int cmd_count = 0;
     int i = 0;
-    char *cmd = "/bin/echo  ana | wc -l" ;
-    while (cmd[i] != '\0')
-    {
-        if (cmd[i] == '|')
-            cmd_count++;
-        i++;
-    }
-    tiny->cmds = malloc(sizeof(char ***) * (cmd_count + 2));
-    if (!tiny->cmds)
-        return ;
+    char *cmd = "/bin/echo  hello world | /bin/echo what'up it's me" ;
     tiny->full_cmd = _split(cmd, ' ');
-    copy(tiny);
-
-    for (int i = 0; tiny->cmds[i]; i++)
-    {
-        for (int j = 0; tiny->cmds[i][j]; j++)
-            printf(" cmds[%d][%d] = ['%s'] ",i, j, tiny->cmds[i][j]);
-        printf("i = %d\n", i);
-        printf("\n");        
-    }
-    
-}
-
-void lexer()
-{
-    char *cmd = "echo  ana | wc -l" ;
-    int i = -1;
-    while (++i && cmd[i])
-    {
-        
-    }
+    _copy(tiny, cli);
+    print_linked_list(cli);
 }
 
 
-void fork_s(t_tiny *tiny)
+
+
+void fork_s(t_cli *cli)
 {
-    pid_t pid;
-    int i = 0;
-        if (!(pid = fork()))
-            execve(tiny->cmds[i][0], tiny->cmds[i], NULL);
+    while (cli)
+    {
+        if (fork() == 0)
+            execve(cli->cmd[0], cli->cmd, NULL);
         else
-            waitpid(pid, NULL, 0);
+            waitpid(-1, NULL, 0);
+        cli = cli->next;
+    }
 }
 int main (int ac, char **av)
 {
-    (void)ac; (void)av; t_tiny tiny;
+    (void)ac; (void)av; t_tiny tiny; t_cli cli;
 
-    pipe_handle(&tiny);
-    fork_s(&tiny);
+    pipe_handle(&tiny, &cli);
+    fork_s(&cli);
 }
