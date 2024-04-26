@@ -28,11 +28,11 @@ void _copy(t_tiny *tiny, t_cli *cli)
 
     while (tiny->full_cmd[i] && cli)
     {
-        if (_strcmp(tiny->full_cmd[i], "|") == 0 || tiny->full_cmd[i + 1] == NULL)
+        if (_strcmp(tiny->full_cmd[i], ">") == 0 || tiny->full_cmd[i + 1] == NULL)
         {
             j = 0;
             cli->cmd = _malloc(sizeof(char **) * (i - k + 1));
-            while (k <= i && _strcmp(tiny->full_cmd[k], "|") != 0)
+            while (k <= i && _strcmp(tiny->full_cmd[k], ">") != 0)
             {
                 cli->cmd[j] = strdup(tiny->full_cmd[k]);
                 k++;
@@ -52,14 +52,11 @@ void    pipe_handle(t_tiny *tiny, t_cli *cli)
 {
     int cmd_count = 0;
     int i = 0;
-    char *cmd = "/bin/echo  hello world | /bin/echo what'up it's me" ;
+    char *cmd = "/bin/echo  hello world > /bin/echo what'up it's me" ;
     tiny->full_cmd = _split(cmd, ' ');
     _copy(tiny, cli);
     print_linked_list(cli);
 }
-
-
-
 
 void fork_s(t_cli *cli)
 {
