@@ -64,6 +64,7 @@ void	free_split(char **split);
 /* Error Handling functions */
 void cmd_not_found(char *cmd, char **s, char *line, char *path);
 void execve_error(t_tiny *tiny);
+int printsdr(char *str);
 
 /* Parsing function */
 char *get_name();
@@ -76,5 +77,11 @@ void sigchld_handler(int signum);
 /* Free */
 void _free(t_tiny *tiny);
 
-
+//test functions
+int	check_for_quote(char c, int quote);
+int	check_syntax_errors(char *s);
+static int	pipe_and_semi_errors(char *str);
+static int	check_pipe_errors(char *s);
+static int	check_quote_errors(char *s);
+char *ft_strtrim_inplace(char *s) ;
 #endif // MINI_SHELL_H

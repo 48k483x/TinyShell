@@ -13,3 +13,10 @@ void execve_error(t_tiny *tiny)
     if ((execve(tiny->path, tiny->s, NULL) == -1))
         cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);
 }
+
+int printsdr(char *str)
+{
+    size_t i = _strlen(str);
+    write(2, str, i);
+    return 1;
+}
