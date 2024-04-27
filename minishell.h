@@ -19,6 +19,7 @@
 #include <sys/ioctl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <stdbool.h>
 
 
 /* Structs of TinyShell */
