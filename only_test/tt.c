@@ -74,7 +74,7 @@ char *ft_strtrim_inplace(char *s)
 {
   if (s == NULL) 
     return NULL;
-  while (*s == ' ' && *s != '\0')
+  while ((*s == ' ' || *s == '\t') && *s != '\0')
     s++;
   if (*s == '\0')
     return s;
@@ -188,7 +188,7 @@ int	check_syntax_errors(char *s)
 }
 int main (int ac, char **av)
 {
-  if (check_syntax_errors(av[1]))
+  if ( ac == 1 || check_syntax_errors(av[1]))
   {
     return 1;
   }
