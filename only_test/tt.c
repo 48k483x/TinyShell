@@ -79,10 +79,8 @@ char *ft_strtrim_inplace(char *s)
   if (*s == '\0')
     return s;
   char *end = s + _strlen(s) - 1;
-  while (*end == ' ' && end > s) {
+  while (*end == ' ' && end > s)
     end--;
-  }
-
   *(end + 1) = '\0';
 
   return s;
@@ -182,8 +180,11 @@ int	check_syntax_errors(char *s)
   char *str;
 
   str = ft_strtrim_inplace(s);
-  if (pipe_and_semi_errors(str) || check_quote_errors(str) || check_redir_errors(str))
+  if (pipe_and_semi_errors(str) || check_quote_errors(str) || check_redir_errors(str)){
+	printf("%s\n", str);
     return 1;
+  }
+  printf("%s\n", str);
   return 0;
 }
 int main (int ac, char **av)
@@ -192,6 +193,5 @@ int main (int ac, char **av)
   {
     return 1;
   }
-  printf("%s\n", av[1]);
   return 0;
 }
