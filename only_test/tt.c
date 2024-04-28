@@ -35,10 +35,10 @@ static int	redirection_syntax_errors(char *str, int i)
 	if (!str[i] || str[i] == '|' || str[i] == '>' || str[i] == '<')
 	{
 		if (!str[i])
-			printsdr("minishell: syntax error near unexpected token `newline'");
+			printsdr("Tinyshell: syntax error near unexpected token `newline'");
 		else
 		{
-			printsdr("minishell: syntax error near unexpected token `");
+			printsdr("Tinyshell: syntax error near unexpected token `");
 			write(2, &str[i], 1);
 			write(1, "'\n", 2);
 		}
@@ -110,7 +110,7 @@ static int	check_quote_errors(char *s)
 			while (s[i] && s[i] != '"')
 				i++;
 			if (s[i] != '"')
-				return (printsdr("minishell: unclosed double quote error"));
+				return (printsdr("Tinyshell: unclosed double quote error"));
 		}
 		if (s[i] == '\'')
 		{
@@ -118,7 +118,7 @@ static int	check_quote_errors(char *s)
 			while (s[i] && s[i] != '\'')
 				i++;
 			if (s[i] != '\'')
-				return (printsdr("minishell: unclosed single quote error"));
+				return (printsdr("Tinyshell: unclosed single quote error"));
 		}
 		i++;
 	}
@@ -144,7 +144,7 @@ static int	check_pipe_errors(char *s)
 			while (s[i] == ' ')
 				i++;
 			if (s[i] == '|')
-				return (printsdr("minishell: syntax error near unexpected token `|'"));
+				return (printsdr("Tinyshell: syntax error near unexpected token `|'"));
 		}
 		i++;
 	}
@@ -158,16 +158,16 @@ static int	pipe_and_semi_errors(char *str)
 	if (str[0] == '|')
 	{
 		if (str[1] == '|')
-			return (printsdr("minishell: syntax error near unexpected token `||'"));
+			return (printsdr("Tinyshell: syntax error near unexpected token `||'"));
 		else
-			return (printsdr("minishell: syntax error near unexpected token `|'"));
+			return (printsdr("Tinyshell: syntax error near unexpected token `|'"));
 	}
 	else if (str[0] == ';')
 	{
 		if (str[1] == ';')
-			return (printsdr("minishell: syntax error near unexpected token `;;'"));
+			return (printsdr("Tinyshell: syntax error near unexpected token `;;'"));
 		else
-			return (printsdr("minishell: syntax error near unexpected token `;'"));
+			return (printsdr("Tinyshell: syntax error near unexpected token `;'"));
 	}
 	if (check_pipe_errors(str))
 		return (1);
@@ -189,6 +189,6 @@ int	check_syntax_errors(char *s)
 }
 int main ()
 {
-	char s[]="  ls | echo 'hello'";
+	char s[]=" \"ls\" -\"l\" ";
  check_syntax_errors(s);
 }
