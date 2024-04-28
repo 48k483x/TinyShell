@@ -26,34 +26,38 @@ void cmd_tokenize(char *cmd, t_token *head)
     t_token *tail = head;
 
     for (char *c = cmd; *c; c++) {
-        if (*c == '"') {
+        if (*c == '"') 
+        {
             out_double_quotes = !out_double_quotes;
             if (!out_double_quotes && token_start) {
                 copy_token(token_start, c, &tail);
                 token_start = NULL;
             }
-        } else if (*c == '\'') {
+        }
+        else if (*c == '\'') 
+        {
             out_single_quotes = !out_single_quotes;
             if (!out_single_quotes && token_start) {
                 copy_token(token_start, c, &tail);
                 token_start = NULL;
             }
-        } else if (!isalnum(*c) && *c != '-' && (!out_double_quotes) && (!out_single_quotes)) {
+        }
+        else if (!isalnum(*c) && *c != '-' && (!out_double_quotes) && (!out_single_quotes)) {
             if (token_start) {
                 copy_token(token_start, c, &tail);
                 token_start = NULL;
             }
-        } else {
-            if (!token_start) {
-                token_start = c;
-            }
         }
+        else
+            if (!token_start)
+                token_start = c;
     }
 
     if (token_start) {
         tail->token = malloc(strlen(token_start) + 1);
         strcpy(tail->token, token_start);
         tail->next = NULL;
+        token_start = NULL;
     }
     else
         tail = NULL;
