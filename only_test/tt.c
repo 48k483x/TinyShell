@@ -187,11 +187,8 @@ int	check_syntax_errors(char *s)
   printf("%s\n", str);
   return 0;
 }
-int main (int ac, char **av)
+int main ()
 {
-  if ( ac == 1 || check_syntax_errors(av[1]))
-  {
-    return 1;
-  }
-  return 0;
+	char s[]="  ls | echo 'hello'";
+ check_syntax_errors(s);
 }
