@@ -9,6 +9,15 @@ typedef struct s_token
     struct s_token *next;
 } t_token;
 
+void copy_token(char *token_start, char *c, t_token **tail)
+{
+    (*tail)->token = malloc(c - token_start + 1);
+    strncpy((*tail)->token, token_start, c - token_start);
+    (*tail)->token[c - token_start] = '\0';
+    (*tail)->next = malloc(sizeof(t_token));
+    *tail = (*tail)->next;
+}
+
 void cmd_tokenize(char *cmd, t_token *head)
 {
     bool out_double_quotes = false;
@@ -20,31 +29,19 @@ void cmd_tokenize(char *cmd, t_token *head)
         if (*c == '"') {
             out_double_quotes = !out_double_quotes;
             if (!out_double_quotes && token_start) {
-                tail->token = malloc(c - token_start + 1);
-                strncpy(tail->token, token_start, c - token_start);
-                tail->token[c - token_start] = '\0';
+                copy_token(token_start, c, &tail);
                 token_start = NULL;
-                tail->next = malloc(sizeof(t_token));
-                tail = tail->next;
             }
         } else if (*c == '\'') {
             out_single_quotes = !out_single_quotes;
             if (!out_single_quotes && token_start) {
-                tail->token = malloc(c - token_start + 1);
-                strncpy(tail->token, token_start, c - token_start);
-                tail->token[c - token_start] = '\0';
+                copy_token(token_start, c, &tail);
                 token_start = NULL;
-                tail->next = malloc(sizeof(t_token));
-                tail = tail->next;
             }
         } else if (!isalnum(*c) && *c != '-' && (!out_double_quotes) && (!out_single_quotes)) {
             if (token_start) {
-                tail->token = malloc(c - token_start + 1);
-                strncpy(tail->token, token_start, c - token_start);
-                tail->token[c - token_start] = '\0';
+                copy_token(token_start, c, &tail);
                 token_start = NULL;
-                tail->next = malloc(sizeof(t_token)); 
-                tail = tail->next;
             }
         } else {
             if (!token_start) {
