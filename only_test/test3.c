@@ -53,7 +53,8 @@ void cmd_tokenize(char *cmd, t_token *head)
                 token_start = c;
     }
 
-    if (token_start) {
+    if (token_start) 
+    {
         tail->token = malloc(strlen(token_start) + 1);
         strcpy(tail->token, token_start);
         tail->next = NULL;
