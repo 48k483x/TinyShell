@@ -79,9 +79,9 @@ void _free(t_tiny *tiny);
 
 //test functions
 int	check_for_quote(char c, int quote);
-int	check_syntax_errors(char *s);
-static int	pipe_and_semi_errors(char *str);
-static int	check_pipe_errors(char *s);
-static int	check_quote_errors(char *s);
-char *ft_strtrim_inplace(char *s) ;
+int	check_syntax(char *s);
+int	pipe_and_semi_errors(char *str);
+int	check_pipe_errors(char *s);
+int	check_quote_errors(char *s);
+char *ft_strtrim_inplace(char *s);
 #endif // MINI_SHELL_H
