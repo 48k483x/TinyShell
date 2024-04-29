@@ -12,6 +12,8 @@ typedef struct s_token
 void copy_token(char *token_start, char *c, t_token **tail)
 {
     (*tail)->token = malloc(c - token_start + 1);
+    // printf("token_start: %s\n", token_start);
+    // printf("c: %s\n", c);
     strncpy((*tail)->token, token_start, c - token_start);
     (*tail)->token[c - token_start] = '\0';
     (*tail)->next = malloc(sizeof(t_token));
@@ -26,10 +28,12 @@ void cmd_tokenize(char *cmd, t_token *head)
     t_token *tail = head;
 
     for (char *c = cmd; *c; c++) {
+        // printf("c: %s\n", c);
         if (*c == '"') 
         {
             out_double_quotes = !out_double_quotes;
-            if (!out_double_quotes && token_start) {
+            if (!out_double_quotes && token_start) 
+            {
                 copy_token(token_start, c, &tail);
                 token_start = NULL;
             }
@@ -52,7 +56,6 @@ void cmd_tokenize(char *cmd, t_token *head)
             if (!token_start)
                 token_start = c;
     }
-
     if (token_start) 
     {
         tail->token = malloc(strlen(token_start) + 1);
@@ -60,8 +63,6 @@ void cmd_tokenize(char *cmd, t_token *head)
         tail->next = NULL;
         token_start = NULL;
     }
-    else
-        tail = NULL;
 }
 
 int main() {

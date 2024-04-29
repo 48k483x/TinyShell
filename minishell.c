@@ -22,12 +22,12 @@ int main()
         tiny.line = readline(initialise_prompt(&tiny));
         if (!tiny.line || _strlen(tiny.line) == 0)
             continue;
-        if (tiny.line)
+        if (tiny.line && !check_syntax(tiny.line))
         {
             path_checker(&tiny);
             add_history(tiny.line);
+            _fork(&tiny);
         }
-        _fork(&tiny);
     }
     _free(&tiny);
 }

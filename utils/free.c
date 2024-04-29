@@ -1,4 +1,4 @@
-#include "./minishell.h"
+#include "../minishell.h"
 
 void _free(t_tiny *tiny)
 {

@@ -1,14 +1,6 @@
 #include "../minishell.h"
 
-int printsdr(char *str)
-{
-    size_t i = _strlen(str);
-    write(2, str, i);
-    write(2, "\n", 1);
-    return 1;
-}
-
-static int	skip_quotes(char *str, int i)
+int	skip_quotes(char *str, int i)
 {
 	if (str[i] == '"')
 	{
@@ -23,7 +15,7 @@ static int	skip_quotes(char *str, int i)
 	return (i + 1);
 }
 
-static int	redirection_syntax_errors(char *str, int i)
+int	redirection_syntax_errors(char *str, int i)
 {
 	if ((str[i] == '>' && str[i + 1] == '>')
 		|| (str[i] == '<' && str[i + 1] == '<'))
@@ -37,11 +29,7 @@ static int	redirection_syntax_errors(char *str, int i)
 		if (!str[i])
 			printsdr("Tinyshell: syntax error near unexpected token `newline'");
 		else
-		{
 			printsdr("Tinyshell: syntax error near unexpected token `");
-			write(2, &str[i], 1);
-			write(1, "'\n", 2);
-		}
 		return (-100);
 	}
 	return (i);
@@ -97,7 +85,7 @@ int	check_for_quote(char c, int quote)
 	return (quote);
 }
 // checking if there is a single/double quote for each single/double quote
-static int	check_quote_errors(char *s)
+int	check_quote_errors(char *s)
 {
 	int		i;
 
@@ -125,14 +113,12 @@ static int	check_quote_errors(char *s)
 	return (0);
 }
 //checking if there is a pipe without actual commands
-static int	check_pipe_errors(char *s)
+int	check_pipe_errors(char *s)
 {
 	int		i;
 	int		quote;
-	int		pipe;
 
 	quote = 0;
-	pipe = 0;
 	i = 0;
 	while (s[i])
 	{
@@ -151,7 +137,7 @@ static int	check_pipe_errors(char *s)
 	return (0);
 }
 // checking for unexpected placement for pipe and semi-colon
-static int	pipe_and_semi_errors(char *str)
+int	pipe_and_semi_errors(char *str)
 {
 	if (str == NULL)
 		return (0);
@@ -175,20 +161,20 @@ static int	pipe_and_semi_errors(char *str)
 }
 
 
-int	check_syntax_errors(char *s)
+int	check_syntax(char *s)
 {
   char *str;
 
   str = ft_strtrim_inplace(s);
-  if (pipe_and_semi_errors(str) || check_quote_errors(str) || check_redir_errors(str)){
-	printf("%s\n", str);
+  
+  if (pipe_and_semi_errors(str) || check_quote_errors(str) || check_redir_errors(str))
     return 1;
-  }
-  printf("%s\n", str);
   return 0;
 }
-int main ()
-{
-	char s[]=" \"ls\" -\"l\" ";
- check_syntax_errors(s);
-}
+// int main ()
+// {
+// 	char s[100];
+// 	printf("Enter the string: ");
+// 	scanf("%[^\n]%*c", s);
+// 	check_syntax_errors(s);
+// }

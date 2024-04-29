@@ -18,5 +18,6 @@ int printsdr(char *str)
 {
     size_t i = _strlen(str);
     write(2, str, i);
+    write(2, "\n", 1);
     return 1;
 }
