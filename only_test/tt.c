@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+
 int	skip_quotes(char *str, int i)
 {
 	if (str[i] == '"')
@@ -176,5 +177,6 @@ int	check_syntax(char *s)
 // 	char s[100];
 // 	printf("Enter the string: ");
 // 	scanf("%[^\n]%*c", s);
-// 	check_syntax_errors(s);
+// 	check_syntax(s);
+// 	printf("The string is: %s\n", s);
 // }
