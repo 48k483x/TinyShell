@@ -27,46 +27,90 @@ int quote_type(char c)
     return 0;
 }
 
+int quotes_num(char *cmd, int quote)
+{
+    int i;
+    int count;
+
+    i = 0;
+    count = 0;
+    if (quote == 1)
+    {
+        while (cmd[i])
+        {
+            if (cmd[i] == '\'')
+                count++;
+            i++;
+        }
+    }
+    else if (quote == 2)
+    {
+        while (cmd[i])
+        {
+            if (cmd[i] == '"')
+                count++;
+            i++;
+        }
+    }
+    return (count);
+}
+
+void remove_char(char *str, char target) {
+    int len = strlen(str);
+    int i, j;
+
+    for (i = 0, j = 0; i < len; i++) {
+        if (str[i] != target) {
+            str[j++] = str[i];
+        }
+    }
+    str[j] = '\0'; // Null-terminate the string
+}
+
 void cmd_tokenize(char *cmd, t_token *head)
 {
     int quote = 0;  // 0: no quote, 1: single quote, 2: double quote
     char *token_start = NULL;
     t_token *tail = head;
+    int count = 0;
+    int i = 0;
+    char *c;
 
-    for (char *c = cmd; *c; c++) {
+    for (c = cmd; *c; c++) {
         if (*c == '"' || *c == '\'') {
             if (quote == 0) {
-                // Start of a quoted string
                 quote = quote_type(*c);
+                count = quotes_num(cmd, quote) - 1;
+                printf("count = %d\n", count);
                 token_start = c + 1;  // Skip the quote
-            } else if ((quote == 2 && *c == '"') && (*(c+1) != ' ' && *(c+1) != '\t' && *(c+1) != '\0')) {
-                // If we're inside a double quoted string and the next character is not a space, tab, or end of string,
-                // then we're dealing with a nested quote. Ignore it.
-                continue;
-            } else if ((quote == 1 && *c == '\'') && (*(c+1) != ' ' && *(c+1) != '\t' && *(c+1) != '\0')) {
-                // If we're inside a single quoted string and the next character is not a space, tab, or end of string,
-                // then we're dealing with a nested quote. Ignore it.
-                continue;
-            } else if ((quote == 2 && *c == '"') || (quote == 1 && *c == '\'')) {
-                // End of a quoted string
+            } else if ((quote == 2 && *c == '"')) {
+                i++;
+                printf(" in quote = 2 i = %d\n", i);
+                if (i < count)
+                    remove_char(c, '"');
+            } else if ((quote == 1 && *c == '\'')) {
+                i++;
+                printf(" in quote = 1 i = %d\n", i);
+                if (i < count)
+                    remove_char(c, '\'');
+            } if (((quote == 2 && *c == '"') || (quote == 1 && *c == '\'')) && i == count) {
                 copy_token(token_start, c, &tail);
                 token_start = NULL;
                 quote = 0;
             }
         } else if (quote == 0 && (*c == ' ' || *c == '\t')) {
-            // End of an unquoted token
             if (token_start) {
                 copy_token(token_start, c, &tail);
                 token_start = NULL;
             }
         } else if (!token_start) {
-            // Start of an unquoted token
             token_start = c;
         }
     }
     if (token_start) {
-        // End of the last token
-        copy_token(token_start, cmd + strlen(cmd), &tail);
+        printf("c = %s\n", c);
+        printf("token_start = %s\n", token_start);
+        copy_token(token_start, c, &tail);
     }
     tail->token = NULL;  // Mark the end of the tokens
 }
@@ -82,7 +126,7 @@ int main() {
     if (input_string[strlen(input_string) - 1] == '\n') {
         input_string[strlen(input_string) - 1] = '\0';
     }
-
+    // printf("quotes num = %d\n", quotes_num(input_string, 1));
     cmd_tokenize(input_string, &head);
 
     printf("Tokens:\n");
