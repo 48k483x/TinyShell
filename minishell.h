@@ -54,6 +54,7 @@ size_t    _strlen(const char *s);
 void *_memcpy(void *dest, const void *src, size_t n);
 void *_realloc(void *ptr, size_t size);
 void *_malloc(size_t size);
+char	*_strdup(const char *s1);
 /* Split Utils */
 int	count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);
@@ -77,11 +78,63 @@ void sigchld_handler(int signum);
 /* Free */
 void _free(t_tiny *tiny);
 
-//test functions
-int	check_for_quote(char c, int quote);
-int	check_syntax(char *s);
-int	pipe_and_semi_errors(char *str);
-int	check_pipe_errors(char *s);
-int	check_quote_errors(char *s);
-char *ft_strtrim_inplace(char *s);
+
+//samawi structs
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
+typedef struct s_cmd 
+{
+	char					*cmd;
+	char					**args;
+	t_list					*redir;
+}   t_cmd;
+
+typedef struct s_var
+{
+	int						i;
+	char					*result;
+} t_var;
+
+typedef struct s_prs
+{
+	int						arg_num;
+	int						i;
+	int						ambigous;
+	int						ret_value;
+	char					**extra_args;
+	int						outside_quote;
+	t_var					var;
+} t_prs;
+
+typedef struct s_env
+{
+	char					*key;
+	char					*value;
+}t_env;
+
+typedef struct s_redir
+{
+	char					type;
+	char					*file;
+}t_redir;
+//samawi functions
+int	        check_for_quote(char c, int quote);
+int	        check_syntax(char *s);
+int	        pipe_and_semi_errors(char *str);
+int	        check_pipe_errors(char *s);
+int	        check_quote_errors(char *s);
+int	        check_redir_errors(char *str);
+int	        get_size(char *s);
+char        *ft_strtrim_inplace(char *s);
+void	    allocate_args(char *s, t_cmd *cmd, t_list *env_lst);
+char	    *_substr(char const *s, unsigned int start, size_t len);
+static char	*change_pipe(char *s);
+static int	skip_space_and_redir(char *s, int i);
+
+
 #endif // MINI_SHELL_H

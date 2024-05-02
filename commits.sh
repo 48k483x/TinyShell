@@ -16,6 +16,6 @@ done
 
 # Clean up the repository after finishing the loop
    rm -rf COMMITS.md
-   git add COMMITS.md
+   git add .
    git commit -m "🎉✅ Finished implementing feature updates and optimizations 🚀"
    git push # origin main

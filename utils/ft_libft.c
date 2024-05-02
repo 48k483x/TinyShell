@@ -46,6 +46,26 @@ char *_strcat(char *dest, char *src)
     return (cat);
 }
 
+char	*_strdup(const char *s1)
+{
+	int		i;
+	char	*a;
+
+	if (s1 == NULL)
+		return (NULL);
+	a = malloc(_strlen(s1) + 1);
+	if (a == 0)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		a[i] = s1[i];
+		i++;
+	}
+	a[i] = '\0';
+	return (a);
+}
+
 // void *_memcpy(void *dest, const void *src, size_t n)
 // {
 //     int i;

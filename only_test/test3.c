@@ -85,15 +85,14 @@ void cmd_tokenize(char *cmd, t_token *head)
                 token_start = c + 1;  // Skip the quote
             } else if ((quote == 2 && *c == '"')) {
                 i++;
-                printf(" in quote = 2 i = %d\n", i);
                 if (i < count)
                     remove_char(c, '"');
             } else if ((quote == 1 && *c == '\'')) {
                 i++;
-                printf(" in quote = 1 i = %d\n", i);
                 if (i < count)
                     remove_char(c, '\'');
             } if (((quote == 2 && *c == '"') || (quote == 1 && *c == '\'')) && i == count) {
+                printf("i = %d\n", i);
                 copy_token(token_start, c, &tail);
                 token_start = NULL;
                 quote = 0;
@@ -108,6 +107,7 @@ void cmd_tokenize(char *cmd, t_token *head)
         }
     }
     if (token_start) {
+        printf("i = %d\n", i);
         printf("c = %s\n", c);
         printf("token_start = %s\n", token_start);
         copy_token(token_start, c, &tail);

@@ -16,63 +16,21 @@ int	skip_quotes(char *str, int i)
 	return (i + 1);
 }
 
-int	redirection_syntax_errors(char *str, int i)
-{
-	if ((str[i] == '>' && str[i + 1] == '>')
-		|| (str[i] == '<' && str[i + 1] == '<'))
-		i += 2;
-	else
-		i++;
-	while (str[i] == ' ')
-		i++;
-	if (!str[i] || str[i] == '|' || str[i] == '>' || str[i] == '<')
-	{
-		if (!str[i])
-			printsdr("Tinyshell: syntax error near unexpected token `newline'");
-		else
-			printsdr("Tinyshell: syntax error near unexpected token `");
-		return (-100);
-	}
-	return (i);
-}
-
-int	check_redir_errors(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '"' || str[i] == '\'')
-			i = skip_quotes(str, i);
-		while (str[i] == ' ')
-			i++;
-		if (str[i] == '>' || str[i] == '<')
-			i = redirection_syntax_errors(str, i);
-		if (i == -100)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-
-
 // triming the inial space and the ending space
 char *ft_strtrim_inplace(char *s) 
 {
-  if (s == NULL) 
-    return NULL;
-  while ((*s == ' ' || *s == '\t') && *s != '\0')
-    s++;
-  if (*s == '\0')
-    return s;
-  char *end = s + _strlen(s) - 1;
-  while (*end == ' ' && end > s)
-    end--;
-  *(end + 1) = '\0';
-
-  return s;
+	char *end;
+	if (s == NULL) 
+		return NULL;
+	while ((*s == ' ' || *s == '\t') && *s != '\0')
+		s++;
+	if (*s == '\0')
+		return s;
+	end = s + _strlen(s) - 1;
+	while (*end == ' ' && end > s)
+		end--;
+	*(end + 1) = '\0';
+	return s;
 }
 
 int	check_for_quote(char c, int quote)
