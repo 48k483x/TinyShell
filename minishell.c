@@ -46,8 +46,7 @@ int main(int ac, char **av, char **env)
     tiny.no_exec = 0;
     reset_fds(&tiny);
     init_env(&tiny, env);
-    for (int i = 0; env[i]; i++)
-        printf("%s\n", env[i]);
+    private_init_env(&tiny,env);
     set_shell_level(tiny.env);
     // while (1)
     // {
@@ -59,4 +58,5 @@ int main(int ac, char **av, char **env)
     //         add_history(tiny.line);
     //     }
     // }
+    free_all(&tiny);
 }

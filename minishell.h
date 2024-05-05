@@ -147,4 +147,8 @@ void set_shell_level(t_env *env);
 char *get_env_name(char *dest, char *src);
 int false_lvl(char *sh_val);
 
+/* free */
+void free_env(t_env *env);
+void free_all(t_tiny *tiny);
+
 #endif // MINI_SHELL_H

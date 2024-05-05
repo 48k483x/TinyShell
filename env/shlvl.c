@@ -22,10 +22,14 @@ int false_lvl(char *sh_val)
     while (sh_val[i])
     {
         if (!(sh_val[i] >= '0' && sh_val[i] <= '9'))
-            return (0);
+        {
+            _memdel(sh_val);
+            return (1);
+        }
+            
         i++;
     }
-    return (1);
+    return (0);
 }
 
 // int get_lvl(char *sh_val)
