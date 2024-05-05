@@ -37,7 +37,7 @@ char *get_env_value(char *env_value)
 
 char *fetch_env(char *arg, t_env *env)
 {
-    char *env_name[BUFFER_SIZE];
+   char *env_name[BUFFER_SIZE];
     char *env_value;
 
     env_value = _strdup("");
