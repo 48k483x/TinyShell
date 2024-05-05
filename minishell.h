@@ -93,6 +93,8 @@ void *_realloc(void *ptr, size_t size);
 void *_malloc(size_t size);
 char	*_strdup(const char *s1);
 void *_memdel(void *ptr);
+int _atoi(char *s);
+char *_strjoin(char *dest, char *src);
 /* Split Utils */
 int	count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);
@@ -142,5 +144,7 @@ char *fetch_env(char *arg, t_env *env);
 
 /* shlvl */
 void set_shell_level(t_env *env);
+char *get_env_name(char *dest, char *src);
+int false_lvl(char *sh_val);
 
 #endif // MINI_SHELL_H

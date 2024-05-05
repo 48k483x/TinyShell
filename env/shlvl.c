@@ -28,28 +28,22 @@ int false_lvl(char *sh_val)
     return (1);
 }
 
-int get_lvl(char *sh_val)
-{
-    int i;
-    int sh_lvl;
+// int get_lvl(char *sh_val)
+// {
 
-    i = 0;
-    sh_lvl = 0;
-    if (false_lvl(sh_val))
-        return (0);
-    return (_atoi(sh_val));
-}
+//     if (false_lvl(sh_val))
+//         return (0);
+//     return (_atoi(sh_val));
+// }
 
 void set_shell_level(t_env *env)
 {
-    int sh_lvl;
     char *sh_lvl_value;
-    // char *shlvl;
     char env_name[BUFFER_SIZE];
 
     sh_lvl_value = fetch_env("SHLVL", env);
-    sh_lvl = get_lvl(sh_lvl_value);
-    // _memdel(sh_lvl_value);
+    if (false_lvl(sh_lvl_value))
+        return ;
     while (env && env->value)
     {
         get_env_name(env_name, env->value);

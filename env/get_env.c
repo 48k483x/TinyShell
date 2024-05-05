@@ -37,13 +37,13 @@ char *get_env_value(char *env_value)
 
 char *fetch_env(char *arg, t_env *env)
 {
-   char *env_name[BUFFER_SIZE];
+   char env_name[BUFFER_SIZE];
     char *env_value;
 
     env_value = _strdup("");
     while (env && env->value)
     {
-        env_name = get_env_name(env_name, env->value);
+        get_env_name(env_name, env->value);
         if (_strcmp(arg, env_name) == 0)
         {
             _memdel(env_value);

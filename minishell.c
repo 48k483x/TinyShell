@@ -48,6 +48,7 @@ int main(int ac, char **av, char **env)
     init_env(&tiny, env);
     for (int i = 0; env[i]; i++)
         printf("%s\n", env[i]);
+    set_shell_level(tiny.env);
     // while (1)
     // {
     //     tiny.line = readline(initialise_prompt(&tiny));
