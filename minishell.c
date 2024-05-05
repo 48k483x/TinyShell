@@ -4,7 +4,7 @@ void _fork(t_tiny *tiny)
 {
     tiny->pid = fork();
     if (tiny->pid < 0)
-        perror("fork");
+        printsdr("fork");
     if (tiny->pid == 0)
         execve_error(tiny);
     else

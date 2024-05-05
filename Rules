@@ -26,7 +26,7 @@ The list you provided contains various functions and system calls that are commo
     dup, dup2: Functions for duplicating file descriptors.
     pipe: Creates a pipe for inter-process communication.
     opendir, readdir, closedir: Functions for directory manipulation.
-    strerror, perror: Functions for error handling and printing error messages.
+    strerror, printsdr: Functions for error handling and printing error messages.
     isatty, ttyname, ttyslot, ioctl: Functions for terminal I/O.
     getenv: Retrieves the value of an environment variable.
     tcsetattr, tcgetattr: Functions for terminal settings.

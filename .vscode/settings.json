@@ -91,6 +91,9 @@
     "type_traits": "c",
     "typeinfo": "c",
     "variant": "c",
-    "*.inc": "c"
+    "*.inc": "c",
+    "optional": "c",
+    "array": "c",
+    "utility": "c"
   }
 }
