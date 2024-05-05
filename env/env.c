@@ -45,4 +45,3 @@ int private_init_env(t_tiny *tiny, char **envp)
     }
     return (0);
 }
-

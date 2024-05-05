@@ -21,6 +21,8 @@
 #include <readline/history.h>
 #include <stdbool.h>
 
+#define BUFFER_SIZE 4096
+
 typedef struct	s_token
 {
 	char			*str;
@@ -90,6 +92,7 @@ void *_memcpy(void *dest, const void *src, size_t n);
 void *_realloc(void *ptr, size_t size);
 void *_malloc(size_t size);
 char	*_strdup(const char *s1);
+void *_memdel(void *ptr);
 /* Split Utils */
 int	count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);
@@ -130,5 +133,14 @@ void reset_fds(t_tiny *tiny);
 
 /* env */
 int  init_env(t_tiny *tiny, char **envp);
+int private_init_env(t_tiny *tiny, char **envp);
+
+/* get env */
+int env_value_len(char *env_value);
+char *get_env_value(char *env_value);
+char *fetch_env(char *arg, t_env *env);
+
+/* shlvl */
+void set_shell_level(t_env *env);
 
 #endif // MINI_SHELL_H
