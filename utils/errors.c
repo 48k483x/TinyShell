@@ -8,7 +8,7 @@ void cmd_not_found(char *cmd, char **s, char *line, char *path)
     free(line);
 }
 
-void execve_error(t_tiny *tiny)
+void execve_error(t_tini *tiny)
 {
     if ((execve(tiny->path, tiny->s, NULL) == -1))
         cmd_not_found(tiny->s[0], tiny->s, tiny->line, tiny->path);

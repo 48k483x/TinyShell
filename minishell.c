@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void _fork(t_tiny *tiny)
+void _fork(t_tini *tiny)
 {
     tiny->pid = fork();
     if (tiny->pid < 0)
@@ -11,23 +11,50 @@ void _fork(t_tiny *tiny)
         waitpid(tiny->pid, NULL, 0);
 }
 
-int main()
+// int main()
+// {
+//     t_tini tiny;
+
+//     while (1)
+//     {
+//         signal(SIGINT, sig_handler);
+//         signal(SIGCHLD, sigchld_handler);
+//         tiny.line = readline(initialise_prompt(&tiny));
+//         if (!tiny.line || _strlen(tiny.line) == 0)
+//             continue;
+//         if (tiny.line && !check_syntax(tiny.line))
+//         {
+//             path_checker(&tiny);
+//             add_history(tiny.line);
+//             _fork(&tiny);
+//         }
+//     }
+//     _free(&tiny);
+// }
+
+
+int main(int ac, char **av, char **env)
 {
     t_tiny tiny;
-
-    while (1)
-    {
-        signal(SIGINT, sig_handler);
-        signal(SIGCHLD, sigchld_handler);
-        tiny.line = readline(initialise_prompt(&tiny));
-        if (!tiny.line || _strlen(tiny.line) == 0)
-            continue;
-        if (tiny.line && !check_syntax(tiny.line))
-        {
-            path_checker(&tiny);
-            add_history(tiny.line);
-            _fork(&tiny);
-        }
-    }
-    _free(&tiny);
+    
+    (void)ac;
+    (void)av;
+    tiny.in = dup(0);
+    tiny.out = dup(1);
+    tiny.exit = 0;
+    tiny.ret = 0;
+    tiny.no_exec = 0;
+    reset_fds(&tiny);
+    for (int i = 0; env[i]; i++)
+        printf("%s\n", env[i]);
+    // while (1)
+    // {
+    //     tiny.line = readline(initialise_prompt(&tiny));
+    //     if (!tiny.line || _strlen(tiny.line) == 0)
+    //         continue;
+    //     if (tiny.line && !check_syntax(tiny.line))
+    //     {
+    //         add_history(tiny.line);
+    //     }
+    // }
 }

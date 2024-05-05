@@ -20,7 +20,7 @@ void print_linked_list(t_cli *cli)
     }
 }
 
-void _copy(t_tiny *tiny, t_cli *cli)
+void _copy(t_tini *tiny, t_cli *cli)
 {
     int i = 0;
     int j;
@@ -48,7 +48,7 @@ void _copy(t_tiny *tiny, t_cli *cli)
     cli->next = NULL;
 }
 
-void    pipe_handle(t_tiny *tiny, t_cli *cli)
+void    pipe_handle(t_tini *tiny, t_cli *cli)
 {
     int cmd_count = 0;
     int i = 0;
@@ -71,7 +71,7 @@ void fork_s(t_cli *cli)
 }
 int main (int ac, char **av)
 {
-    (void)ac; (void)av; t_tiny tiny; t_cli cli;
+    (void)ac; (void)av; t_tini tiny; t_cli cli;
 
     pipe_handle(&tiny, &cli);
     fork_s(&cli);

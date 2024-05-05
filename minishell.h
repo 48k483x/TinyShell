@@ -35,7 +35,7 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
-typedef struct	s_mini
+typedef struct	s_tiny
 {
 	t_token			*start;
 	t_env			*env;
@@ -53,10 +53,10 @@ typedef struct	s_mini
 	int				ret;
 	int				exit;
 	int				no_exec;
-}				t_mini;
+}				t_tiny;
 
 /* Structs of TinyShell */
-typedef struct s_tiny
+typedef struct s_tini
 {
     int i;
     int j;
@@ -71,7 +71,7 @@ typedef struct s_tiny
     char **s;
     char *line;
     pid_t pid;
-}   t_tiny;
+}   t_tini;
 
 
 
@@ -99,19 +99,19 @@ void	free_split(char **split);
 
 /* Error Handling functions */
 void cmd_not_found(char *cmd, char **s, char *line, char *path);
-void execve_error(t_tiny *tiny);
+void execve_error(t_tini *tiny);
 int printsdr(char *str);
 
 /* Parsing function */
 char *get_name();
-char *initialise_prompt(t_tiny *tiny);
-void path_checker(t_tiny *tiny);
+char *initialise_prompt(t_tini *tiny);
+void path_checker(t_tini *tiny);
 /* Signal */
 void    sig_handler(int signum);
 void sigchld_handler(int signum);
 
 /* Free */
-void _free(t_tiny *tiny);
+void _free(t_tini *tiny);
 
 /* Check Syntax */
 int check_syntax(char *str);
@@ -124,5 +124,8 @@ char *ft_strtrim_inplace(char *s);
 int check_pipe_errors(char *str);
 int pipe_and_semi_errors(char *str);
 
+
+/* tools */
+void reset_fds(t_tiny *tiny);
 
 #endif // MINI_SHELL_H
