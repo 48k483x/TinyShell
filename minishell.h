@@ -39,7 +39,7 @@ typedef struct	s_tiny
 {
 	t_token			*start;
 	t_env			*env;
-	t_env			*secret_env;
+	t_env			*private_env;
 	int				in;
 	int				out;
 	int				fdin;
@@ -127,5 +127,8 @@ int pipe_and_semi_errors(char *str);
 
 /* tools */
 void reset_fds(t_tiny *tiny);
+
+/* env */
+int  init_env(t_tiny *tiny, char **envp);
 
 #endif // MINI_SHELL_H

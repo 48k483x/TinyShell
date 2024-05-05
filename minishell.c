@@ -45,6 +45,7 @@ int main(int ac, char **av, char **env)
     tiny.ret = 0;
     tiny.no_exec = 0;
     reset_fds(&tiny);
+    init_env(&tiny, env);
     for (int i = 0; env[i]; i++)
         printf("%s\n", env[i]);
     // while (1)
