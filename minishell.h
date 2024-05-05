@@ -21,6 +21,39 @@
 #include <readline/history.h>
 #include <stdbool.h>
 
+typedef struct	s_token
+{
+	char			*str;
+	int				type;
+	struct s_token	*prev;
+	struct s_token	*next;
+} t_token;
+
+typedef struct	s_env
+{
+	char			*value;
+	struct s_env	*next;
+}				t_env;
+
+typedef struct	s_mini
+{
+	t_token			*start;
+	t_env			*env;
+	t_env			*secret_env;
+	int				in;
+	int				out;
+	int				fdin;
+	int				fdout;
+	int				pipin;
+	int				pipout;
+	int				pid;
+	int				charge;
+	int				parent;
+	int				last;
+	int				ret;
+	int				exit;
+	int				no_exec;
+}				t_mini;
 
 /* Structs of TinyShell */
 typedef struct s_tiny
@@ -39,6 +72,8 @@ typedef struct s_tiny
     char *line;
     pid_t pid;
 }   t_tiny;
+
+
 
 typedef struct s_cli
 {
