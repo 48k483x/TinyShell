@@ -14,7 +14,7 @@ char *get_env_name(char *dest, char *src)
     return (dest);
 }
 
-void false_lvl(char *sh_val)
+int false_lvl(char *sh_val)
 {
     int i;
 
