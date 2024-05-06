@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int  init_env(t_tiny *tiny, char **envp)
 {

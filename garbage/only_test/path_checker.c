@@ -1,16 +1,3 @@
-#include "../minishell.h"
-
-char *get_name()
-{
-    return (getenv("USER"));
-}
-
-char *initialise_prompt(t_tini *tiny)
-{
-    tiny->prompt = _strcat(get_name(),"\033[0;34m@TinyShell\033[0m\033[0;33m $ \033[0m");
-    return (tiny->prompt);
-}
-
 void path_checker(t_tini *tiny)
 {
     if (!tiny->line)

@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 char *get_env_name(char *dest, char *src)
 {
@@ -31,14 +31,6 @@ int false_lvl(char *sh_val)
     }
     return (0);
 }
-
-// int get_lvl(char *sh_val)
-// {
-
-//     if (false_lvl(sh_val))
-//         return (0);
-//     return (_atoi(sh_val));
-// }
 
 void set_shell_level(t_env *env)
 {

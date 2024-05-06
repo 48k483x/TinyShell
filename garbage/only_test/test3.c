@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../minishell.h"
+#include "../../minishell.h"
 
 typedef struct s_token
 {

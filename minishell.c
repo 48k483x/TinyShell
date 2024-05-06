@@ -1,36 +1,17 @@
 #include "minishell.h"
 
-void _fork(t_tini *tiny)
+char *get_name(void)
 {
-    tiny->pid = fork();
-    if (tiny->pid < 0)
-        printsdr("fork");
-    if (tiny->pid == 0)
-        execve_error(tiny);
-    else
-        waitpid(tiny->pid, NULL, 0);
+    return (getenv("USER"));
 }
 
-// int main()
-// {
-//     t_tini tiny;
+char *initialise_prompt(void)
+{
+    char *prompt;
 
-//     while (1)
-//     {
-//         signal(SIGINT, sig_handler);
-//         signal(SIGCHLD, sigchld_handler);
-//         tiny.line = readline(initialise_prompt(&tiny));
-//         if (!tiny.line || _strlen(tiny.line) == 0)
-//             continue;
-//         if (tiny.line && !check_syntax(tiny.line))
-//         {
-//             path_checker(&tiny);
-//             add_history(tiny.line);
-//             _fork(&tiny);
-//         }
-//     }
-//     _free(&tiny);
-// }
+    prompt = _strcat(get_name(),"\033[0;34m@TinyShell\033[0m\033[0;33m $ \033[0m");
+    return (prompt);
+}
 
 
 int main(int ac, char **av, char **env)
@@ -39,8 +20,8 @@ int main(int ac, char **av, char **env)
     
     (void)ac;
     (void)av;
-    tiny.in = dup(0);
-    tiny.out = dup(1);
+    tiny.in = dup(STDIN);
+    tiny.out = dup(STDOUT);
     tiny.exit = 0;
     tiny.ret = 0;
     tiny.no_exec = 0;
@@ -48,15 +29,15 @@ int main(int ac, char **av, char **env)
     init_env(&tiny, env);
     private_init_env(&tiny,env);
     set_shell_level(tiny.env);
-    // while (1)
-    // {
-    //     tiny.line = readline(initialise_prompt(&tiny));
-    //     if (!tiny.line || _strlen(tiny.line) == 0)
-    //         continue;
-    //     if (tiny.line && !check_syntax(tiny.line))
-    //     {
-    //         add_history(tiny.line);
-    //     }
-    // }
+    while (1)
+    {
+        tiny.line = readline(initialise_prompt());
+        if (!tiny.line || _strlen(tiny.line) == 0)
+            continue;
+        if (tiny.line && !check_syntax(tiny.line))
+        {
+            add_history(tiny.line);
+        }
+    }
     free_all(&tiny);
 }

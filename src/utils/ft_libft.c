@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 char *_strjoin(char *dest, char *src)
 {

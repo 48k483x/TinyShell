@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void reset_fds(t_tiny *tiny)
 {

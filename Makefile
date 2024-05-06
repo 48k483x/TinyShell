@@ -1,8 +1,8 @@
 FLAGS = -g -Wall -Wextra -Werror 
-SRC = minishell.c ./utils/split.c ./utils/ft_libft.c \
-		./utils/errors.c ./utils/parsing.c ./utils/signals.c  ./utils/free.c \
-			./parse/check_syntax.c ./tools/fd.c ./env/env.c ./env/get_env.c ./env/shlvl.c \
-			./free/free.c
+SRC = minishell.c ./src/utils/split.c ./src/utils/ft_libft.c \
+		./src/utils/errors.c ./src/utils/signals.c  \
+			./src/parse/check_syntax.c ./src/tools/fd.c ./src/env/env.c ./src/env/get_env.c ./src/env/shlvl.c \
+			./src/free/free.c
 
 OBJ = $(SRC:.c=.o)
 NAME = minishell
