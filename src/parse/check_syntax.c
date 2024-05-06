@@ -164,19 +164,14 @@ int	pipe_and_semi_errors(char *str)
 
 int	check_syntax(char *s)
 {
-  char *str;
+  char *l;
 
-  str = ft_strtrim_inplace(s);
+  l = ft_strtrim_inplace(s);
   
-  if (pipe_and_semi_errors(str) || check_quote_errors(str) || check_redir_errors(str))
-    return 1;
+  if (pipe_and_semi_errors(l) || check_quote_errors(l) || check_redir_errors(l))
+  {
+	_memdel(l);
+	return (1);
+  }
   return 0;
 }
-// int main ()
-// {
-// 	char s[100];
-// 	printf("Enter the string: ");
-// 	scanf("%[^\n]%*c", s);
-// 	check_syntax(s);
-// 	printf("The string is: %s\n", s);
-// }

@@ -29,7 +29,7 @@ int main(int ac, char **av, char **env)
     init_env(&tiny, env);
     private_init_env(&tiny,env);
     set_shell_level(tiny.env);
-    while (1)
+    while (tiny.exit == 0)
     {
         tiny.line = readline(initialise_prompt());
         if (!tiny.line || _strlen(tiny.line) == 0)
