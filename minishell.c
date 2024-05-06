@@ -31,6 +31,7 @@ int main(int ac, char **av, char **env)
     set_shell_level(tiny.env);
     while (tiny.exit == 0)
     {
+        signal(SIGINT, sig_handler);
         tiny.line = readline(initialise_prompt());
         if (!tiny.line || _strlen(tiny.line) == 0)
             continue;
