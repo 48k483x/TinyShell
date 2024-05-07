@@ -5,11 +5,41 @@ char *get_name(void)
     return (getenv("USER"));
 }
 
+// char *get_dir(void)
+// {
+//     char dir[50];
+//     char *pwd;
+
+//     pwd = getenv("PWD");
+//     while (*pwd)
+//     {
+//         if (*pwd == '/')
+//         {
+//             pwd++;
+//             strcpy(dir, pwd);
+//         }
+//         pwd++;
+//     }
+//     return (dir);
+// }
+
 char *initialise_prompt(void)
 {
     char *prompt;
+    char dir[200];
+    char *pwd;
 
-    prompt = _strcat(get_name(),"\033[0;34m@TinyShell\033[0m\033[0;33m $ \033[0m");
+    pwd = getenv("PWD");
+    while (*pwd)
+    {
+        if (*pwd == '/')
+        {
+            pwd++;
+            strcpy(dir, pwd);
+        }
+        pwd++;
+    }
+    prompt = _strcat(dir, " \033[1;33m$ \033[0m");
     return (prompt);
 }
 
