@@ -160,7 +160,7 @@ void *_malloc(size_t size)
 
 void *_memdel(void *ptr)
 {
-    if (ptr)
+    if (ptr != NULL)
     {
         free(ptr);
         ptr = NULL;

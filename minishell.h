@@ -118,6 +118,7 @@ void 	d_handler(int signum);
 /* Check Syntax */
 int check_syntax(char *str);
 int redirection_syntax_errors(char *str, int i);
+int quotes(char *s, int index);
 int check_for_quote(char c, int quote);
 int check_quote_errors(char *s);
 int skip_quotes(char *str, int i);
@@ -126,6 +127,12 @@ char *ft_strtrim_inplace(char *s);
 int check_pipe_errors(char *str);
 int pipe_and_semi_errors(char *str);
 
+
+/* Parse */
+int is_operator(char *s, int index);
+char *spacing(char *s);
+char *space_line(char *line);
+void parse(char *line);
 
 /* tools */
 void reset_fds(t_tiny *tiny);

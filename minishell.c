@@ -53,16 +53,17 @@ int main(int ac, char **av, char **env)
         tiny.line = readline(read);
         if (!tiny.line || _strlen(tiny.line) == 0)
         {
-            // continue;
+            continue;
         }
         history(tiny.line);
         if (tiny.line && !check_syntax(tiny.line))
         {
-            _memdel(tiny.line);
+            parse(tiny.line);
+            printf("tiny line %s\n", tiny.line);
+            // _memdel(tiny.line);
         }
 
     }
-    _memdel(tiny.line);
     _memdel(read);
     free_all(&tiny);
     rl_clear_history();

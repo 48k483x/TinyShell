@@ -78,8 +78,8 @@ void	free_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		free(split[i]);
+		_memdel(split[i]);
 		i++;
 	}
-	free(split);
+	_memdel(split);
 }

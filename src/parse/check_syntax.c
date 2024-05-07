@@ -86,31 +86,14 @@ int	check_for_quote(char c, int quote)
 	return (quote);
 }
 // checking if there is a single/double quote for each single/double quote
+
 int	check_quote_errors(char *s)
 {
-	int		i;
+	int quote;
 
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '"')
-		{
-			i++;
-			while (s[i] && s[i] != '"')
-				i++;
-			if (s[i] != '"')
-				return (printsdr("Tinyshell: unclosed double quote error"));
-		}
-		if (s[i] == '\'')
-		{
-			i++;
-			while (s[i] && s[i] != '\'')
-				i++;
-			if (s[i] != '\'')
-				return (printsdr("Tinyshell: unclosed single quote error"));
-		}
-		i++;
-	}
+	quote = quotes(s, _strlen(s));
+	if (quote != 0)
+		return (printsdr("Tinyshell: unclosed double quote error"));
 	return (0);
 }
 
