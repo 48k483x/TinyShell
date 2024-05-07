@@ -6,7 +6,7 @@ if [ ! -f COMMITS.md ]; then
 fi
 
 # Loop 100 times
-for i in {1..99}
+for i in {1..80}
 do
    echo "a" >> COMMITS.md                       # Append "a" to the file
    git add COMMITS.md                           # Stage the file for commit

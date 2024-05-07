@@ -11,6 +11,14 @@ void    sig_handler(int signum)
     }
 }
 
+void d_handler(int signum)
+{
+    if (signum == SIGQUIT)
+    {
+        printf("Quit: 3\n");
+    }
+}
+
 void sigchld_handler(int signum)
 {
     // This function is a signal handler for the SIGCHLD signal. This signal is

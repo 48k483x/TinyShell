@@ -1,5 +1,37 @@
 #include "../../minishell.h"
 
+char *_strchr(const char *s, int c)
+{
+    int i;
+
+    i = 0;
+    if (!s)
+        return (NULL);
+    while (s[i])
+    {
+        if (s[i] == c)
+            return ((char *)&s[i]);
+        i++;
+    }
+    return (NULL);
+}
+
+int _strcpy(char *dest, char *src)
+{
+    int i;
+
+    i = 0;
+    if (!src || !dest)
+        return (0);
+    while (src[i])
+    {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';
+    return (i);
+}
+
 char *_strjoin(char *dest, char *src)
 {
     int i;

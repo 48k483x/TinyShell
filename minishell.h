@@ -80,66 +80,40 @@ typedef struct	s_tiny
 	int				no_exec;
 }				t_tiny;
 
-/* Structs of TinyShell */
-typedef struct s_tini
-{
-    int i;
-    int j;
-    int k;
-    char ***cmds;
-    char **operators;
-    char **full_cmd;
-    char *name;
-    char **env;
-    char *prompt;
-    char *path;
-    char **s;
-    char *line;
-    pid_t pid;
-}   t_tini;
-
-
-
-typedef struct s_cli
-{
-    char **cmd;
-    struct  s_cli *next;
-} t_cli;
 
 /* functions of lib_ft utils*/
 char *_strcat(char *dest, char *src);
 char	**_split(char const *s, char c);
 int _strcmp(const char *s1, const char *s2);
 size_t    _strlen(const char *s);
-void *_memcpy(void *dest, const void *src, size_t n);
-void *_realloc(void *ptr, size_t size);
 void *_malloc(size_t size);
 char	*_strdup(const char *s1);
 void *_memdel(void *ptr);
 int _atoi(char *s);
 char *_strjoin(char *dest, char *src);
+int _strcpy(char *dest, char *src);
+char *_strchr(const char *s, int c);
 /* Split Utils */
 int	count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);
+
+
 
 /* Free Utils */
 void	free_split(char **split);
 
 /* Error Handling functions */
-void cmd_not_found(char *cmd, char **s, char *line, char *path);
-void execve_error(t_tini *tiny);
 int printsdr(char *str);
 
 /* Parsing function */
 char *get_name(void);
 char *initialise_prompt(void);
-void path_checker(t_tini *tiny);
+
 /* Signal */
 void    sig_handler(int signum);
-void sigchld_handler(int signum);
+void 	sigchld_handler(int signum);
+void 	d_handler(int signum);
 
-/* Free */
-void _free(t_tini *tiny);
 
 /* Check Syntax */
 int check_syntax(char *str);

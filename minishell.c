@@ -5,24 +5,11 @@ char *get_name(void)
     return (getenv("USER"));
 }
 
-// char *get_dir(void)
-// {
-//     char dir[50];
-//     char *pwd;
-
-//     pwd = getenv("PWD");
-//     while (*pwd)
-//     {
-//         if (*pwd == '/')
-//         {
-//             pwd++;
-//             strcpy(dir, pwd);
-//         }
-//         pwd++;
-//     }
-//     return (dir);
-// }
-
+void history(char *line)
+{
+    if (line && *line)
+        add_history(line);
+}
 char *initialise_prompt(void)
 {
     char *prompt;
@@ -35,7 +22,7 @@ char *initialise_prompt(void)
         if (*pwd == '/')
         {
             pwd++;
-            strcpy(dir, pwd);
+            _strcpy(dir, pwd);
         }
         pwd++;
     }
@@ -47,7 +34,7 @@ char *initialise_prompt(void)
 int main(int ac, char **av, char **env)
 {
     t_tiny tiny;
-    
+    char *read = initialise_prompt();
     (void)ac;
     (void)av;
     tiny.in = dup(STDIN);
@@ -61,14 +48,22 @@ int main(int ac, char **av, char **env)
     set_shell_level(tiny.env);
     while (tiny.exit == 0)
     {
-        signal(SIGINT, sig_handler);
-        tiny.line = readline(initialise_prompt());
+        // signal(SIGINT, sig_handler);
+        signal(SIGQUIT, d_handler);
+        tiny.line = readline(read);
         if (!tiny.line || _strlen(tiny.line) == 0)
-            continue;
+        {
+            // continue;
+        }
+        history(tiny.line);
         if (tiny.line && !check_syntax(tiny.line))
         {
-            add_history(tiny.line);
+            _memdel(tiny.line);
         }
+
     }
+    _memdel(tiny.line);
+    _memdel(read);
     free_all(&tiny);
+    rl_clear_history();
 }

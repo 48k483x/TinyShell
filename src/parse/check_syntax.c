@@ -113,18 +113,24 @@ int	check_quote_errors(char *s)
 	}
 	return (0);
 }
+
 //checking if there is a pipe without actual commands
 int	check_pipe_errors(char *s)
 {
 	int		i;
 	int		quote;
+	int		inside;
 
 	quote = 0;
+	inside = 0;
 	i = 0;
 	while (s[i])
 	{
 		if (s[i] == '"' || s[i] == '\'')
+		{
 			quote = check_for_quote(s[i++], quote);
+			inside = 1;
+		}
 		if (s[i] == '|' && !quote)
 		{
 			i++;
@@ -133,6 +139,8 @@ int	check_pipe_errors(char *s)
 			if (s[i] == '|')
 				return (printsdr("Tinyshell: syntax error near unexpected token `|'"));
 		}
+		if (s[i] == '|' && inside)
+			return (printsdr("Tinyshell: syntax error near unexpected token `|'"));
 		i++;
 	}
 	return (0);
@@ -167,7 +175,7 @@ int	check_syntax(char *s)
   char *l;
 
   l = ft_strtrim_inplace(s);
-  
+
   if (pipe_and_semi_errors(l) || check_quote_errors(l) || check_redir_errors(l))
   {
 	_memdel(l);
