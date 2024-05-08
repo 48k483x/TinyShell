@@ -123,7 +123,7 @@ int check_for_quote(char c, int quote);
 int check_quote_errors(char *s);
 int skip_quotes(char *str, int i);
 int check_redir_errors(char *str);
-char *ft_strtrim_inplace(char *s);
+void _str_trim(char *line);
 int check_pipe_errors(char *str);
 int pipe_and_semi_errors(char *str);
 
@@ -132,7 +132,10 @@ int pipe_and_semi_errors(char *str);
 int is_operator(char *s, int index);
 char *spacing(char *s);
 char *space_line(char *line);
-void parse(char *line);
+void parse(t_tiny *tiny);
+
+/* Tokens */
+t_token *get_token(char *line);
 
 /* tools */
 void reset_fds(t_tiny *tiny);

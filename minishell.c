@@ -58,8 +58,7 @@ int main(int ac, char **av, char **env)
         history(tiny.line);
         if (tiny.line && !check_syntax(tiny.line))
         {
-            parse(tiny.line);
-            printf("tiny line %s\n", tiny.line);
+            parse(&tiny);
             // _memdel(tiny.line);
         }
 

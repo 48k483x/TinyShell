@@ -1,5 +1,27 @@
 #include "../../minishell.h"
 
+void _str_trim(char *line)
+{
+    int i;
+    int j;
+    int len;
+
+    i = 0;
+    j = 0;
+    len =_strlen(line);
+    while (line[i] == ' ' || line[i] == '\t')
+        i++;
+    while (line[len - 1] == ' ' || line[len - 1] == '\t')
+        len--;
+    while (i < len)
+    {
+        line[j] = line[i];
+        i++;
+        j++;
+    }
+    line[j] = '\0';
+}
+
 char *_strchr(const char *s, int c)
 {
     int i;

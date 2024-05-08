@@ -81,8 +81,11 @@ char *space_line(char *line)
     return (new);
 }
 
-void parse(char *line)
+void parse(t_tiny *tiny)
 {
-    line = space_line(line);
-    printf("new line: %s\n", line);
+    tiny->line = space_line(tiny->line);
+    if (tiny->line &&tiny->line[0] == '$')
+        tiny->line[0] = (char)(-tiny->line[0]);
+    printf("tiny->line = %s\n", tiny->line);
+    tiny->start = get_token(tiny->line);
 }

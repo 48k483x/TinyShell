@@ -59,22 +59,6 @@ int	check_redir_errors(char *str)
 
 
 // triming the inial space and the ending space
-char *ft_strtrim_inplace(char *s) 
-{
-  if (s == NULL) 
-    return NULL;
-  while ((*s == ' ' || *s == '\t') && *s != '\0')
-    s++;
-  if (*s == '\0')
-    return s;
-  char *end = s + _strlen(s) - 1;
-  while (*end == ' ' && end > s)
-    end--;
-  *(end + 1) = '\0';
-
-  return s;
-}
-
 int	check_for_quote(char c, int quote)
 {
 	if (c == '"' && quote == 0)
@@ -155,14 +139,8 @@ int	pipe_and_semi_errors(char *str)
 
 int	check_syntax(char *s)
 {
-  char *l;
-
-  l = ft_strtrim_inplace(s);
-
-  if (pipe_and_semi_errors(l) || check_quote_errors(l) || check_redir_errors(l))
-  {
-	_memdel(l);
-	return (1);
-  }
-  return 0;
+	_str_trim(s);
+	if (pipe_and_semi_errors(s) || check_quote_errors(s) || check_redir_errors(s))
+		return (1);
+	return 0;
 }
