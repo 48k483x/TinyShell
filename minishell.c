@@ -52,7 +52,7 @@ int main(int ac, char **av, char **env)
     {
         disable_echo();
         signal(SIGINT, int_handler);
-        signal(SIGQUIT, quit_handler);
+        signal(SIGQUIT, SIG_IGN);
         tiny.line = readline(read);
         if (!tiny.line || _strlen(tiny.line) == 0)
         {
