@@ -33,6 +33,8 @@ char *initialise_prompt(void)
 
 int main(int ac, char **av, char **env)
 {
+    if(ac != 1 || !env)
+        return (1);
     t_tiny tiny;
     char *read = initialise_prompt();
     (void)ac;
