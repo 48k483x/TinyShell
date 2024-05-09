@@ -51,8 +51,8 @@ int main(int ac, char **av, char **env)
     while (tiny.exit == 0)
     {
         disable_echo();
-        signal(SIGINT, sig_handler);
-        signal(SIGQUIT, d_handler);
+        signal(SIGINT, int_handler);
+        signal(SIGQUIT, quit_handler);
         tiny.line = readline(read);
         if (!tiny.line || _strlen(tiny.line) == 0)
         {

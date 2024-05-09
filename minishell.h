@@ -122,9 +122,8 @@ char *get_name(void);
 char *initialise_prompt(void);
 
 /* Signal */
-void    sig_handler(int signum);
-void 	sigchld_handler(int signum);
-void 	d_handler(int signum);
+void    int_handler(int signum);
+void 	quit_handler(int signum);
 void    disable_echo(void);
 
 
