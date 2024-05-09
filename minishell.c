@@ -50,6 +50,7 @@ int main(int ac, char **av, char **env)
     set_shell_level(tiny.env);
     while (tiny.exit == 0)
     {
+        disable_echo();
         signal(SIGINT, sig_handler);
         signal(SIGQUIT, d_handler);
         tiny.line = readline(read);
