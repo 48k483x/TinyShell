@@ -1,5 +1,11 @@
 #include "../../minishell.h"
 
+void _skip_32(char *line, int *i)
+{
+    while (line[*i] == ' ')
+        (*i)++;
+}
+
 void _str_trim(char *line)
 {
     int i;

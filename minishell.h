@@ -33,9 +33,12 @@
 # define ARG 2
 # define TRUNC 3
 # define APPEND 4
-# define INPUT 5
-# define PIPE 6
-# define END 7
+# define APPEND_OPPOSITE 5
+# define DELIM 6
+# define INPUT 7
+# define PIPE 8
+# define END 9
+
 
 /* gnl */
 typedef struct s_list
@@ -105,6 +108,7 @@ int _atoi(char *s);
 char *_strjoin(char *dest, char *src);
 int _strcpy(char *dest, char *src);
 char *_strchr(const char *s, int c);
+void _skip_32(char *line, int *i);
 /* Split Utils */
 int	count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);

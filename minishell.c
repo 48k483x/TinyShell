@@ -30,6 +30,11 @@ char *initialise_prompt(void)
     return (prompt);
 }
 
+void exec_everything(t_tiny *tiny)
+{
+    
+}
+
 
 int main(int ac, char **av, char **env)
 {
