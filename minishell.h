@@ -158,14 +158,24 @@ char *spacing(char *s);
 char *space_line(char *line);
 void parse(t_tiny *tiny);
 
+/* Exec */
+void exec(t_tiny *tiny);
+void redir_exec(t_tiny *tiny, t_token *token);
+void redir(t_tiny *tiny, t_token *token, int type);
+
 /* Tokens */
 t_token *get_token(char *line);
 
 /* tools */
 void reset_fds(t_tiny *tiny);
+void _close(int fd);
+void reset_std(t_tiny *tiny);
+void _close_fds(t_tiny *tiny);
 t_token *next_run(t_token *token);
 int is_type(t_token *token, int type);
 int is_types(t_token *token, char *types);
+t_token *prev_sep(t_token *token);
+t_token *next_sep(t_token *token);
 
 /* env */
 int  init_env(t_tiny *tiny, char **envp);

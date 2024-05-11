@@ -87,11 +87,5 @@ void parse(t_tiny *tiny)
 	if (tiny->line &&tiny->line[0] == '$')
 	    tiny->line[0] = (char)(-tiny->line[0]);
 	tiny->start = get_token(tiny->line);
-    while (tiny->start)
-    {
-        printf("tiny->start->str = %s\n", tiny->start->str);
-        printf("tiny->start->type = %d\n", tiny->start->type);
-        tiny->start = tiny->start->next;
-    }
     _memdel(tiny->line);
 }

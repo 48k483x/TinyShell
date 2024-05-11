@@ -32,6 +32,28 @@ char *initialise_prompt(void)
     return (prompt);
 }
 
+void redir_exec(t_tiny *tiny, t_token *token)
+{
+    t_token *prev;
+    t_token *next;
+    int pipe;
+
+    prev = prev_sep(token);
+    next = next_sep(token);
+    // printf("prev->str: %s\n", prev->str);
+    // printf("prev->type: %d\n", prev->type);
+    // printf("token->str: %s\n", token->str);
+    // printf("next->type: %d\n", next->type);
+    pipe = 0;
+    if (is_type(prev, TRUNC))
+        redir(tiny, token, TRUNC);
+    else if (is_type(prev, INPUT))
+        redir(tiny, token, APPEND);
+    else if (is_type(prev, PIPE))
+        pipe = tinypipe(tiny, token);
+
+}
+
 void exec(t_tiny *tiny)
 {
     t_token *token;
@@ -40,6 +62,18 @@ void exec(t_tiny *tiny)
     token = next_run(tiny->start);
     if (is_types(tiny->start, "TAIW"))
         token = tiny->start->next; 
+    while (tiny->exit == 0 && token)
+    {
+        tiny->parent = 0;
+        tiny->charge = 0;
+        tiny->last = 0;
+        redir_exec(tiny, token);
+        reset_std(tiny);
+        _close_fds(tiny);
+        reset_fds(tiny);
+        token = token->next;
+        token = next_run(token);
+    }
 }
 
 int main(int ac, char **av, char **env)
@@ -73,7 +107,7 @@ int main(int ac, char **av, char **env)
         if (tiny.line && !check_syntax(tiny.line))
         {
             parse(&tiny);
-            // tiny.exit = 1;
+            exec(&tiny);
         }
 
     }
