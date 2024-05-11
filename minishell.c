@@ -47,10 +47,12 @@ void redir_exec(t_tiny *tiny, t_token *token)
     pipe = 0;
     if (is_type(prev, TRUNC))
         redir(tiny, token, TRUNC);
-    else if (is_type(prev, INPUT))
+    else if (is_type(prev, APPEND))
         redir(tiny, token, APPEND);
+    else if (is_type(prev, INPUT))
+        input(tiny, token);
     else if (is_type(prev, PIPE))
-        pipe = tinypipe(tiny, token);
+        pipe = tinypipe(tiny);
 
 }
 

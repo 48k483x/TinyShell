@@ -157,6 +157,7 @@ void	parse(t_tiny *tiny);
 void	exec(t_tiny *tiny);
 void	redir_exec(t_tiny *tiny, t_token *token);
 void	redir(t_tiny *tiny, t_token *token, int type);
+int		tinypipe(t_tiny *tiny);
 
 /* Tokens */
 t_token	*get_token(char *line);

@@ -20,6 +20,21 @@ void redir(t_tiny *tiny, t_token *token, int type)
     }
     dup2(tiny->fdout, STDOUT);
 }
+void    input(t_tiny *tiny, t_token *token)
+{
+    _close(tiny->fdin);
+    tiny->fdin = open(tiny->str, O_RDONLY, S_IRWXU);
+    if (tiny-fdin == -1)
+    {
+        _perror("minishell : ");
+        _perror(tiny->str);
+        _perror(": No such file or directory");
+        tiny->ret = 1;
+        tiny->no_exec = 1;
+        return ;
+    }
+    dup2(tiny->fdin, STDIN);
+}
 
 int tinypipe(t_tiny *tiny)
 {
