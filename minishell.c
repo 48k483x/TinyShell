@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+t_sig g_sig;
+
 char *get_name(void)
 {
     return (getenv("USER"));
@@ -30,11 +32,15 @@ char *initialise_prompt(void)
     return (prompt);
 }
 
-// void exec_everything(t_tiny *tiny)
-// {
-    
-// }
+void exec(t_tiny *tiny)
+{
+    t_token *token;
+    // int status;
 
+    token = next_run(tiny->start);
+    if (is_types(tiny->start, "TAIW"))
+        token = tiny->start->next; 
+}
 
 int main(int ac, char **av, char **env)
 {
@@ -67,7 +73,7 @@ int main(int ac, char **av, char **env)
         if (tiny.line && !check_syntax(tiny.line))
         {
             parse(&tiny);
-            // _memdel(tiny.line);
+            // tiny.exit = 1;
         }
 
     }

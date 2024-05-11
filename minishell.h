@@ -60,6 +60,14 @@ void	append(t_list **list, char *buf);
 
 /* finish gnl */
 
+typedef struct	s_sig
+{
+	int				sigint;
+	int				sigquit;
+	int				exit_status;
+	pid_t			pid;
+}				t_sig;
+
 typedef struct	s_token
 {
 	char			*str;
@@ -155,6 +163,9 @@ t_token *get_token(char *line);
 
 /* tools */
 void reset_fds(t_tiny *tiny);
+t_token *next_run(t_token *token);
+int is_type(t_token *token, int type);
+int is_types(t_token *token, char *types);
 
 /* env */
 int  init_env(t_tiny *tiny, char **envp);
