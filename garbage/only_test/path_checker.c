@@ -1,3 +1,9 @@
+
+
+
+
+
+
 void path_checker(t_tini *tiny)
 {
     if (!tiny->line)

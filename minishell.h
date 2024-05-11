@@ -66,6 +66,7 @@ typedef struct s_sig
 	int				exit_status;
 	pid_t			pid;
 }				t_sig;
+extern t_sig g_sig;
 
 typedef struct s_token
 {
@@ -115,6 +116,7 @@ char	*_strjoin(char *dest, char *src);
 int		_strcpy(char *dest, char *src);
 char	*_strchr(const char *s, int c);
 void	_skip_32(char *line, int *i);
+void _perror(char *str);
 /* Split Utils */
 int		count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);
@@ -158,7 +160,13 @@ void	exec(t_tiny *tiny);
 void	redir_exec(t_tiny *tiny, t_token *token);
 void	redir(t_tiny *tiny, t_token *token, int type);
 int		tinypipe(t_tiny *tiny);
+void	input(t_tiny *tiny, t_token *token);
 
+
+/* Bin */
+char	**path_checker(t_token *token);
+char	**two_dx(t_token *start);
+void 	magic(t_token *token);
 /* Tokens */
 t_token	*get_token(char *line);
 

@@ -2,7 +2,7 @@
 
 t_token *prev_sep(t_token *token)
 {
-    while (token && token->type < TRUNC )
+    while (token && token->type < TRUNC && token->prev != NULL)
         token = token->prev;
     return (token);
 }

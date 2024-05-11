@@ -53,6 +53,9 @@ void redir_exec(t_tiny *tiny, t_token *token)
         input(tiny, token);
     else if (is_type(prev, PIPE))
         pipe = tinypipe(tiny);
+    printf("prev->str: %s\n", prev->str);
+    printf("prev->type: %d\n", prev->type);
+    magic(prev);
 
 }
 
