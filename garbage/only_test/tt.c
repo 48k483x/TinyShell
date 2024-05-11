@@ -59,7 +59,7 @@ int	check_redir_errors(char *str)
 
 
 // triming the inial space and the ending space
-char *ft_strtrim_inplace(char *s) 
+char *_strtrim_inplace(char *s) 
 {
   if (s == NULL) 
     return NULL;
@@ -166,7 +166,7 @@ int	check_syntax(char *s)
 {
   char *str;
 
-  str = ft_strtrim_inplace(s);
+  str = _strtrim_inplace(s);
   
   if (pipe_and_semi_errors(str) || check_quote_errors(str) || check_redir_errors(str))
     return 1;

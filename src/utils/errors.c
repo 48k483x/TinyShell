@@ -1,6 +1,13 @@
 #include "../../minishell.h"
+void _perror(char *str)
+{
+    size_t i;
 
-
+    if (!str)
+        return ;
+    i = _strlen(str);
+    write(2, str, i);
+}
 int printsdr(char *str)
 {
     size_t i;

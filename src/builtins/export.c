@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/15 18:15:54 by macrespo          #+#    #+#             */
-/*   Updated: 2020/08/27 17:22:54 by cclaude          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 static int	print_error(int error, const char *arg)
@@ -17,9 +5,9 @@ static int	print_error(int error, const char *arg)
 	int		i;
 
 	if (error == -1)
-		ft_putstr_fd("export: not valid in this context: ", STDERR);
+		_putstr_fd("export: not valid in this context: " );
 	else if (error == 0 || error == -3)
-		ft_putstr_fd("export: not a valid identifier: ", STDERR);
+		_putstr_fd("export: not a valid identifier: " );
 	i = 0;
 	while (arg[i] && (arg[i] != '=' || error == -3))
 	{
@@ -37,12 +25,12 @@ int			env_add(const char *value, t_env *env)
 
 	if (env && env->value == NULL)
 	{
-		env->value = ft_strdup(value);
+		env->value = _strdup(value);
 		return (SUCCESS);
 	}
 	if (!(new = malloc(sizeof(t_env))))
 		return (-1);
-	new->value = ft_strdup(value);
+	new->value = _strdup(value);
 	while (env && env->next && env->next->next)
 		env = env->next;
 	tmp = env->next;
@@ -56,7 +44,7 @@ char		*get_env_name(char *dest, const char *src)
 	int		i;
 
 	i = 0;
-	while (src[i] && src[i] != '=' && ft_strlen(src) < BUFF_SIZE)
+	while (src[i] && src[i] != '=' && _strlen(src) < BUFF_SIZE)
 	{
 		dest[i] = src[i];
 		i++;
@@ -74,10 +62,10 @@ int			is_in_env(t_env *env, char *args)
 	while (env && env->next)
 	{
 		get_env_name(env_name, env->value);
-		if (ft_strcmp(var_name, env_name) == 0)
+		if (_strcmp(var_name, env_name) == 0)
 		{
-			ft_memdel(env->value);
-			env->value = ft_strdup(args);
+			_memdel(env->value);
+			env->value = _strdup(args);
 			return (1);
 		}
 		env = env->next;
@@ -85,7 +73,7 @@ int			is_in_env(t_env *env, char *args)
 	return (SUCCESS);
 }
 
-int			ft_export(char **args, t_env *env, t_env *secret)
+int			_export(char **args, t_env *env, t_env *secret)
 {
 	int		new_env;
 	int		error_ret;

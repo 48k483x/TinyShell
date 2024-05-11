@@ -69,7 +69,7 @@ void remove_char(char *str, char target) {
 
 void cmd_tokenize(char *cmd, t_token *head)
 {
-    int quote = 0;  // 0: no quote, 1: single quote, 2: double quote
+    int quote = 0;  // 0: no quote, 1: single quote : double quote
     char *token_start = NULL;
     t_token *tail = head;
     int count = 0;

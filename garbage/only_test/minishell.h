@@ -148,7 +148,7 @@ int check_for_quote(char c, int quote);
 int check_quote_errors(char *s);
 int skip_quotes(char *str, int i);
 int check_redir_errors(char *str);
-char *ft_strtrim_inplace(char *s);
+char *_strtrim_inplace(char *s);
 int check_pipe_errors(char *str);
 int pipe_and_semi_errors(char *str);
 

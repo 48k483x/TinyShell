@@ -11,9 +11,9 @@ void redir(t_tiny *tiny, t_token *token, int type)
         tiny->fdout = open(token->str, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
     if (tiny->fdout < 0)
     {
-        perror("tiny: ");
-        perror(token->next->str);
-        perror(": No such file or directory");
+        _perror("tiny: ");
+        _perror(token->next->str);
+        _perror(": No such file or directory");
         tiny->ret = 1;
         tiny->no_exec = 1;
         return ;

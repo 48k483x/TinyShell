@@ -1,28 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/08 19:46:37 by macrespo          #+#    #+#             */
-/*   Updated: 2020/08/31 13:27:15 by macrespo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 static void		print_error(char **args)
 {
-	ft_putstr_fd("cd: ", 2);
+	_putstr_fd("cd: " );
+	_putstr_fd(args[1] );
 	if (args[2])
-		ft_putstr_fd("string not in pwd: ", 2);
+		printsdr("string not in pwd: " );
 	else
 	{
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd(": ", 2);
+		_putstr_fd(": " );
+		printsdr(strerror(errno));
 	}
-	ft_putendl_fd(args[1], 2);
 }
 
 static char		*get_env_path(t_env *env, const char *var, size_t len)
@@ -34,9 +22,9 @@ static char		*get_env_path(t_env *env, const char *var, size_t len)
 
 	while (env && env->next != NULL)
 	{
-		if (ft_strncmp(env->value, var, len) == 0)
+		if (_strncmp(env->value, var, len) == 0)
 		{
-			s_alloc = ft_strlen(env->value) - len;
+			s_alloc = _strlen(env->value) - len;
 			if (!(oldpwd = malloc(sizeof(char) * s_alloc + 1)))
 				return (NULL);
 			i = 0;
@@ -61,11 +49,11 @@ static int		update_oldpwd(t_env *env)
 
 	if (getcwd(cwd, PATH_MAX) == NULL)
 		return (ERROR);
-	if (!(oldpwd = ft_strjoin("OLDPWD=", cwd)))
+	if (!(oldpwd = _strjoin("OLDPWD=", cwd)))
 		return (ERROR);
 	if (is_in_env(env, oldpwd) == 0)
 		env_add(oldpwd, env);
-	ft_memdel(oldpwd);
+	_memdel(oldpwd);
 	return (SUCCESS);
 }
 
@@ -80,7 +68,7 @@ static int		go_to_path(int option, t_env *env)
 		update_oldpwd(env);
 		env_path = get_env_path(env, "HOME", 4);
 		if (!env_path)
-			ft_putendl_fd("minishell : cd: HOME not set", STDERR);
+			printsdr("minishell : cd: HOME not set");
 		if (!env_path)
 			return (ERROR);
 	}
@@ -88,23 +76,23 @@ static int		go_to_path(int option, t_env *env)
 	{
 		env_path = get_env_path(env, "OLDPWD", 6);
 		if (!env_path)
-			ft_putendl_fd("minishell : cd: OLDPWD not set", STDERR);
+			printsdr("minishell : cd: OLDPWD not set");
 		if (!env_path)
 			return (ERROR);
 		update_oldpwd(env);
 	}
 	ret = chdir(env_path);
-	ft_memdel(env_path);
+	_memdel(env_path);
 	return (ret);
 }
 
-int				ft_cd(char **args, t_env *env)
+int				_cd(char **args, t_env *env)
 {
 	int		cd_ret;
 
 	if (!args[1])
 		return (go_to_path(0, env));
-	if (ft_strcmp(args[1], "-") == 0)
+	if (_strcmp(args[1], "-") == 0)
 		cd_ret = go_to_path(1, env);
 	else
 	{

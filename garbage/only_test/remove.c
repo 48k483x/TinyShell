@@ -18,7 +18,7 @@ void copy_token(char *token_start, char *c, t_token **tail) {
 void cmd_tokenize(char *cmd, t_token *head) {
     char *token_start = NULL;
     t_token *tail = head;
-    int quote = 0;  // 0: no quote, 1: single quote, 2: double quote
+    int quote = 0;  // 0: no quote, 1: single quote : double quote
 
     for (char *c = cmd; *c; c++) {
         if ((*c == '"' || *c == '\'') && (quote == 0 || *c == quote)) {

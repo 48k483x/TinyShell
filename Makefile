@@ -1,5 +1,5 @@
 FLAGS = -g -Wall -Wextra -Werror 
-SRC = minishell.c ./src/utils/split.c ./src/utils/ft_libft.c \
+SRC = minishell.c ./src/utils/split.c ./src/utils/_libft.c \
 		./src/utils/errors.c ./src/utils/signals.c \
 			./src/parse/check_syntax.c ./src/tools/fd.c ./src/env/env.c ./src/env/get_env.c ./src/env/shlvl.c \
 			./src/free/free.c ./src/parse/parse.c ./src/parse/tokens.c \
