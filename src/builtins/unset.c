@@ -30,12 +30,12 @@ int				_unset(char **a, t_mini *mini)
 
 	env = mini->env;
 	if (!(a[1]))
-		return (SUCCESS);
+		return (0);
 	if (_strncmp(a[1], env->value, env_size(env->value)) == 0)
 	{
 		mini->env = (env->next) ? env->next : mini->env;
 		free_node(mini, env);
-		return (SUCCESS);
+		return (0);
 	}
 	while (env && env->next)
 	{
@@ -44,9 +44,9 @@ int				_unset(char **a, t_mini *mini)
 			tmp = env->next->next;
 			free_node(mini, env->next);
 			env->next = tmp;
-			return (SUCCESS);
+			return (0);
 		}
 		env = env->next;
 	}
-	return (SUCCESS);
+	return (0);
 }

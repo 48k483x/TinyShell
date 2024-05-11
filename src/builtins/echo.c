@@ -34,5 +34,5 @@ int				_echo(char **args)
 	}
 	if (n_option == 0)
 		write(1, "\n", 1);
-	return (SUCCESS);
+	return (0);
 }

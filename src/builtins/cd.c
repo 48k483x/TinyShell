@@ -48,13 +48,13 @@ static int		update_oldpwd(t_env *env)
 	char	*oldpwd;
 
 	if (getcwd(cwd, PATH_MAX) == NULL)
-		return (ERROR);
+		return (0);
 	if (!(oldpwd = _strjoin("OLDPWD=", cwd)))
-		return (ERROR);
+		return (0);
 	if (is_in_env(env, oldpwd) == 0)
 		env_add(oldpwd, env);
 	_memdel(oldpwd);
-	return (SUCCESS);
+	return (0);
 }
 
 static int		go_to_path(int option, t_env *env)
@@ -68,17 +68,17 @@ static int		go_to_path(int option, t_env *env)
 		update_oldpwd(env);
 		env_path = get_env_path(env, "HOME", 4);
 		if (!env_path)
-			printsdr("minishell : cd: HOME not set");
+			printsdr("tiny: cd: HOME not set");
 		if (!env_path)
-			return (ERROR);
+			return (0);
 	}
 	else if (option == 1)
 	{
 		env_path = get_env_path(env, "OLDPWD", 6);
 		if (!env_path)
-			printsdr("minishell : cd: OLDPWD not set");
+			printsdr("tiny: cd: OLDPWD not set");
 		if (!env_path)
-			return (ERROR);
+			return (0);
 		update_oldpwd(env);
 	}
 	ret = chdir(env_path);

@@ -106,5 +106,5 @@ int main() {
         head = current;
     }
 
-    return 0;
+    return (0);
 }

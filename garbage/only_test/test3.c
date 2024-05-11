@@ -24,7 +24,7 @@ int quote_type(char c)
         return 2;
     if (c == '\'')
         return 1;
-    return 0;
+    return (0);
 }
 
 int quotes_num(char *cmd, int quote)

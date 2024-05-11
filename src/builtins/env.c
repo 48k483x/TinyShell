@@ -9,5 +9,5 @@ int		_env(t_env *env)
 	}
 	if (env)
 		_putendl(env->value);
-	return (SUCCESS);
+	return (0);
 }

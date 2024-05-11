@@ -28,9 +28,9 @@ int	redirection_syntax_errors(char *str, int i)
 	if (!str[i] || str[i] == '|' || str[i] == '>' || str[i] == '<')
 	{
 		if (!str[i])
-			printsdr("Tinyshell: syntax error near unexpected token `newline'");
+			printsdr("tiny: syntax error near unexpected token `newline'");
 		else
-			printsdr("Tinyshell: syntax error near unexpected token `");
+			printsdr("tiny: syntax error near unexpected token `");
 		return (-100);
 	}
 	return (i);
@@ -99,7 +99,7 @@ int	check_quote_errors(char *s)
 			while (s[i] && s[i] != '"')
 				i++;
 			if (s[i] != '"')
-				return (printsdr("Tinyshell: unclosed double quote error"));
+				return (printsdr("tiny: unclosed double quote error"));
 		}
 		if (s[i] == '\'')
 		{
@@ -107,7 +107,7 @@ int	check_quote_errors(char *s)
 			while (s[i] && s[i] != '\'')
 				i++;
 			if (s[i] != '\'')
-				return (printsdr("Tinyshell: unclosed single quote error"));
+				return (printsdr("tiny: unclosed single quote error"));
 		}
 		i++;
 	}
@@ -131,7 +131,7 @@ int	check_pipe_errors(char *s)
 			while (s[i] == ' ')
 				i++;
 			if (s[i] == '|')
-				return (printsdr("Tinyshell: syntax error near unexpected token `|'"));
+				return (printsdr("tiny: syntax error near unexpected token `|'"));
 		}
 		i++;
 	}
@@ -145,16 +145,16 @@ int	pipe_and_semi_errors(char *str)
 	if (str[0] == '|')
 	{
 		if (str[1] == '|')
-			return (printsdr("Tinyshell: syntax error near unexpected token `||'"));
+			return (printsdr("tiny: syntax error near unexpected token `||'"));
 		else
-			return (printsdr("Tinyshell: syntax error near unexpected token `|'"));
+			return (printsdr("tiny: syntax error near unexpected token `|'"));
 	}
 	else if (str[0] == ';')
 	{
 		if (str[1] == ';')
-			return (printsdr("Tinyshell: syntax error near unexpected token `;;'"));
+			return (printsdr("tiny: syntax error near unexpected token `;;'"));
 		else
-			return (printsdr("Tinyshell: syntax error near unexpected token `;'"));
+			return (printsdr("tiny: syntax error near unexpected token `;'"));
 	}
 	if (check_pipe_errors(str))
 		return (1);
@@ -170,7 +170,7 @@ int	check_syntax(char *s)
   
   if (pipe_and_semi_errors(str) || check_quote_errors(str) || check_redir_errors(str))
     return 1;
-  return 0;
+  return (0);
 }
 // int main ()
 // {

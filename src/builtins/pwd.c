@@ -7,8 +7,8 @@ int		_pwd(void)
 	if (getcwd(cwd, PATH_MAX))
 	{
 		printsdr(cwd, 1);
-		return (SUCCESS);
+		return (0);
 	}
 	else
-		return (ERROR);
+		return (0);
 }
