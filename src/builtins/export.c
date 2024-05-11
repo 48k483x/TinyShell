@@ -5,9 +5,9 @@ static int	print_error(int error, const char *arg)
 	int		i;
 
 	if (error == -1)
-		_putstr_fd("export: not valid in this context: " );
+		_perror("export: not valid in this context: " );
 	else if (error == 0 || error == -3)
-		_putstr_fd("export: not a valid identifier: " );
+		_perror("export: not a valid identifier: " );
 	i = 0;
 	while (arg[i] && (arg[i] != '=' || error == -3))
 	{

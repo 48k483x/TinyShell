@@ -26,7 +26,7 @@ int				_echo(char **args)
 		}
 		while (args[i])
 		{
-			_putstr_fd(args[i], 1);
+			printf(args[i]);
 			if (args[i + 1] && args[i][0] != '\0')
 				write(1, " ", 1);
 			i++;

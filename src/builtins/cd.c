@@ -2,13 +2,13 @@
 
 static void		print_error(char **args)
 {
-	_putstr_fd("cd: " );
-	_putstr_fd(args[1] );
+	_perror("cd: ");
+	_perror(args[1]);
 	if (args[2])
-		printsdr("string not in pwd: " );
+		printsdr("string not in pwd: ");
 	else
 	{
-		_putstr_fd(": " );
+		_perror(": ");
 		printsdr(strerror(errno));
 	}
 }
