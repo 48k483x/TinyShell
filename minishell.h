@@ -1,29 +1,29 @@
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <dirent.h>
-#include <limits.h>
-#include <termios.h>
-#include <curses.h>
-#include <term.h>
-#include <sys/ioctl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <errno.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <dirent.h>
+# include <limits.h>
+# include <termios.h>
+# include <curses.h>
+# include <term.h>
+# include <sys/ioctl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdbool.h>
 
-#define BUFFER_SIZE 4096
-#define STDIN 0
-#define STDOUT 1
+# define BUFFER_SIZE 4096
+# define STDIN 0
+# define STDOUT 1
 
 # define SKIP 1
 # define NOSKIP 0
@@ -38,7 +38,6 @@
 # define INPUT 7
 # define PIPE 8
 # define END 9
-
 
 /* gnl */
 typedef struct s_list
@@ -60,7 +59,7 @@ void	append(t_list **list, char *buf);
 
 /* finish gnl */
 
-typedef struct	s_sig
+typedef struct s_sig
 {
 	int				sigint;
 	int				sigquit;
@@ -68,23 +67,23 @@ typedef struct	s_sig
 	pid_t			pid;
 }				t_sig;
 
-typedef struct	s_token
+typedef struct s_token
 {
 	char			*str;
 	int				type;
 	struct s_token	*prev;
 	struct s_token	*next;
-} t_token;
+}	t_token;
 
-typedef struct	s_env
+typedef struct s_env
 {
 	char			*value;
 	struct s_env	*next;
 }				t_env;
 
-typedef struct	s_tiny
+typedef struct s_tiny
 {
-	char            *line; 
+	char			*line;
 	t_token			*start;
 	t_env			*env;
 	t_env			*private_env;
@@ -103,7 +102,6 @@ typedef struct	s_tiny
 	int				no_exec;
 }				t_tiny;
 
-
 /* functions of lib_ft utils*/
 char	*_strcat(char *dest, char *src);
 char	**_split(char const *s, char c);
@@ -121,13 +119,11 @@ void	_skip_32(char *line, int *i);
 int		count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);
 
-
-
 /* Free Utils */
 void	free_split(char **split);
 
 /* Error Handling functions */
-int 	printsdr(char *str);
+int		printsdr(char *str);
 void	_perror(char *str);
 
 /* Parsing function */
@@ -135,10 +131,9 @@ char	*get_name(void);
 char	*initialise_prompt(void);
 
 /* Signal */
-void    int_handler(int signum);
-void 	quit_handler(int signum);
-void    disable_echo(void);
-
+void	int_handler(int signum);
+void	quit_handler(int signum);
+void	disable_echo(void);
 
 /* Check Syntax */
 int		check_syntax(char *str);
@@ -151,7 +146,6 @@ int		check_redir_errors(char *str);
 void	_str_trim(char *line);
 int		check_pipe_errors(char *str);
 int		pipe_and_semi_errors(char *str);
-
 
 /* Parse */
 int		is_operator(char *s, int index);
