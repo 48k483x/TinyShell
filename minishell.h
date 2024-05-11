@@ -105,20 +105,20 @@ typedef struct	s_tiny
 
 
 /* functions of lib_ft utils*/
-char *_strcat(char *dest, char *src);
+char	*_strcat(char *dest, char *src);
 char	**_split(char const *s, char c);
-int _strcmp(const char *s1, const char *s2);
-size_t    _strlen(const char *s);
-void *_malloc(size_t size);
+int		_strcmp(const char *s1, const char *s2);
+size_t	_strlen(const char *s);
+void	*_malloc(size_t size);
 char	*_strdup(const char *s1);
-void *_memdel(void *ptr);
-int _atoi(char *s);
-char *_strjoin(char *dest, char *src);
-int _strcpy(char *dest, char *src);
-char *_strchr(const char *s, int c);
-void _skip_32(char *line, int *i);
+void	*_memdel(void *ptr);
+int		_atoi(char *s);
+char	*_strjoin(char *dest, char *src);
+int		_strcpy(char *dest, char *src);
+char	*_strchr(const char *s, int c);
+void	_skip_32(char *line, int *i);
 /* Split Utils */
-int	count_strings(char const *s, char c);
+int		count_strings(char const *s, char c);
 char	*malloc_strings(const char *s, char c);
 
 
@@ -127,11 +127,12 @@ char	*malloc_strings(const char *s, char c);
 void	free_split(char **split);
 
 /* Error Handling functions */
-int printsdr(char *str);
+int 	printsdr(char *str);
+void	_perror(char *str);
 
 /* Parsing function */
-char *get_name(void);
-char *initialise_prompt(void);
+char	*get_name(void);
+char	*initialise_prompt(void);
 
 /* Signal */
 void    int_handler(int signum);
@@ -140,59 +141,59 @@ void    disable_echo(void);
 
 
 /* Check Syntax */
-int check_syntax(char *str);
-int redirection_syntax_errors(char *str, int i);
-int quotes(char *s, int index);
-int check_for_quote(char c, int quote);
-int check_quote_errors(char *s);
-int skip_quotes(char *str, int i);
-int check_redir_errors(char *str);
-void _str_trim(char *line);
-int check_pipe_errors(char *str);
-int pipe_and_semi_errors(char *str);
+int		check_syntax(char *str);
+int		redirection_syntax_errors(char *str, int i);
+int		quotes(char *s, int index);
+int		check_for_quote(char c, int quote);
+int		check_quote_errors(char *s);
+int		skip_quotes(char *str, int i);
+int		check_redir_errors(char *str);
+void	_str_trim(char *line);
+int		check_pipe_errors(char *str);
+int		pipe_and_semi_errors(char *str);
 
 
 /* Parse */
-int is_operator(char *s, int index);
-char *spacing(char *s);
-char *space_line(char *line);
-void parse(t_tiny *tiny);
+int		is_operator(char *s, int index);
+char	*spacing(char *s);
+char	*space_line(char *line);
+void	parse(t_tiny *tiny);
 
 /* Exec */
-void exec(t_tiny *tiny);
-void redir_exec(t_tiny *tiny, t_token *token);
-void redir(t_tiny *tiny, t_token *token, int type);
+void	exec(t_tiny *tiny);
+void	redir_exec(t_tiny *tiny, t_token *token);
+void	redir(t_tiny *tiny, t_token *token, int type);
 
 /* Tokens */
-t_token *get_token(char *line);
+t_token	*get_token(char *line);
 
 /* tools */
-void reset_fds(t_tiny *tiny);
-void _close(int fd);
-void reset_std(t_tiny *tiny);
-void _close_fds(t_tiny *tiny);
-t_token *next_run(t_token *token);
-int is_type(t_token *token, int type);
-int is_types(t_token *token, char *types);
-t_token *prev_sep(t_token *token);
-t_token *next_sep(t_token *token);
+void	reset_fds(t_tiny *tiny);
+void	_close(int fd);
+void	reset_std(t_tiny *tiny);
+void	_close_fds(t_tiny *tiny);
+t_token	*next_run(t_token *token);
+int		is_type(t_token *token, int type);
+int		is_types(t_token *token, char *types);
+t_token	*prev_sep(t_token *token);
+t_token	*next_sep(t_token *token);
 
 /* env */
-int  init_env(t_tiny *tiny, char **envp);
-int private_init_env(t_tiny *tiny, char **envp);
+int		init_env(t_tiny *tiny, char **envp);
+int		private_init_env(t_tiny *tiny, char **envp);
 
 /* get env */
-int env_value_len(char *env_value);
-char *get_env_value(char *env_value);
-char *fetch_env(char *arg, t_env *env);
+int		env_value_len(char *env_value);
+char	*get_env_value(char *env_value);
+char	*fetch_env(char *arg, t_env *env);
 
 /* shlvl */
-void set_shell_level(t_env *env);
-char *get_env_name(char *dest, char *src);
-int false_lvl(char *sh_val);
+void	set_shell_level(t_env *env);
+char	*get_env_name(char *dest, char *src);
+int		false_lvl(char *sh_val);
 
 /* free */
-void free_env(t_env *env);
-void free_all(t_tiny *tiny);
+void	free_env(t_env *env);
+void	free_all(t_tiny *tiny);
 
 #endif // MINI_SHELL_H
