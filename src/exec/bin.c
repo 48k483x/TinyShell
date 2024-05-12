@@ -64,13 +64,15 @@ void magic(t_token *token, t_tiny *tiny)
 {
     char **str;
     int ret;
-
+    if (tiny->charge == 0)
+        return ;
     ret = 1;
     str = path_checker(token);
     g_sig.pid = fork();
 
     if (g_sig.pid == 0)
     {
+        printf("str[0]: %s\n", str[0]);
         if (execve(str[0], str, NULL) == -1)
         {
             _perror(str[0]); 
@@ -79,7 +81,10 @@ void magic(t_token *token, t_tiny *tiny)
         exit(ret);
     }
     else
-       waitpid(g_sig.pid, &ret, 0);
+    {
+        waitpid(g_sig.pid, &ret, 0);
+        // reset_std(tiny);
+    }
     
     free_split(str);
     _close(tiny->pipin);

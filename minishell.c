@@ -40,7 +40,8 @@ void redir_exec(t_tiny *tiny, t_token *token)
 
     prev = prev_sep(token);
     next = next_sep(token);
-    // printf("prev->str: %s\n", prev->str);
+    printf("token->str: %s\n", token->str);
+    printf("token->type: %d\n", token->type);
     // printf("prev->type: %d\n", prev->type);
     // printf("token->str: %s\n", token->str);
     // printf("next->type: %d\n", next->type);
@@ -57,7 +58,10 @@ void redir_exec(t_tiny *tiny, t_token *token)
         redir_exec(tiny, next->next);
     if ((is_type(prev, END) || is_type(prev, PIPE) ||!prev)
             && tiny->no_exec == 0 && pipe != 1)
-        magic(token, tiny);
+        {
+            printf("token in it->str: %s\n", token->str);
+            magic(token, tiny);
+         } 
 
 }
 
@@ -65,7 +69,7 @@ void redir_exec(t_tiny *tiny, t_token *token)
 void exec(t_tiny *tiny)
 {
     t_token *token;
-    // int status;
+    int status;
 
     token = next_run(tiny->start);
     if (is_types(tiny->start, "TAIW"))
@@ -79,8 +83,8 @@ void exec(t_tiny *tiny)
         reset_std(tiny);
         _close_fds(tiny);
         reset_fds(tiny);
-        // waitpid(-1, &status, 0);
-		// status = WEXITSTATUS(status);
+        waitpid(-1, &status, 0);
+		status = WEXITSTATUS(status);
         tiny->no_exec = 0;
         token = token->next;
         token = next_run(token);
