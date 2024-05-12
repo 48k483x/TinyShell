@@ -60,7 +60,7 @@ char **path_checker(t_token *token)
     return (str);
 }
 
-void magic(t_token *token)
+void magic(t_token *token, t_tiny *tiny)
 {
     char **str;
     int ret;
@@ -76,8 +76,15 @@ void magic(t_token *token)
             _perror(str[0]); 
             printsdr(": Command not found");
         }
+        exit(ret);
     }
     else
        waitpid(g_sig.pid, &ret, 0);
+    
     free_split(str);
+    _close(tiny->pipin);
+	_close(tiny->pipout);
+	tiny->pipin = -1;
+	tiny->pipout = -1;
+	tiny->charge = 0;
 }

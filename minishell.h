@@ -166,7 +166,7 @@ void	input(t_tiny *tiny, t_token *token);
 /* Bin */
 char	**path_checker(t_token *token);
 char	**two_dx(t_token *start);
-void 	magic(t_token *token);
+void 	magic(t_token *token, t_tiny *tiny);
 /* Tokens */
 t_token	*get_token(char *line);
 
