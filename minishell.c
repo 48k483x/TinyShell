@@ -53,11 +53,14 @@ void redir_exec(t_tiny *tiny, t_token *token)
         input(tiny, token);
     else if (is_type(prev, PIPE))
         pipe = tinypipe(tiny);
-    printf("prev->str: %s\n", prev->str);
-    printf("prev->type: %d\n", prev->type);
-    magic(prev);
+    if (next && is_type(next, END) == 0 && pipe != 1)
+        redir_exec(tiny, next->next);
+    if ((is_type(prev, END) || is_type(prev, PIPE) ||!prev)
+            && tiny->no_exec == 0 && pipe != 1)
+        magic(token);
 
 }
+
 
 void exec(t_tiny *tiny)
 {
@@ -69,13 +72,16 @@ void exec(t_tiny *tiny)
         token = tiny->start->next; 
     while (tiny->exit == 0 && token)
     {
-        tiny->parent = 0;
-        tiny->charge = 0;
-        tiny->last = 0;
+        tiny->parent = 1;
+        tiny->charge = 1;
+        tiny->last = 1;
         redir_exec(tiny, token);
         reset_std(tiny);
         _close_fds(tiny);
         reset_fds(tiny);
+        // waitpid(-1, &status, 0);
+		// status = WEXITSTATUS(status);
+        tiny->no_exec = 0;
         token = token->next;
         token = next_run(token);
     }
@@ -105,9 +111,7 @@ int main(int ac, char **av, char **env)
         signal(SIGQUIT, SIG_IGN);
         tiny.line = readline(read);
         if (!tiny.line || _strlen(tiny.line) == 0)
-        {
             continue;
-        }
         history(tiny.line);
         if (tiny.line && !check_syntax(tiny.line))
         {

@@ -1,5 +1,11 @@
 #include "../../minishell.h"
 
+void	_close(int fd)
+{
+	if (fd > 0)
+		close(fd);
+}
+
 void reset_fds(t_tiny *tiny)
 {
     tiny->fdin = -1;
@@ -9,11 +15,7 @@ void reset_fds(t_tiny *tiny)
     tiny->pid = -1;
 }
 
-void	_close(int fd)
-{
-	if (fd > 0)
-		close(fd);
-}
+
 
 void reset_std(t_tiny *tiny)
 {

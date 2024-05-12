@@ -17,15 +17,16 @@ char **two_dx(t_token *start)
         i++;
     }
     str = _malloc(sizeof(char *) * (i + 1));
-    str[i] = NULL;
     str[0] = start->str;
     i = 1;
+    token = start->next;
     while (token && token->type < TRUNC)
     {
         str[i] = token->str;
         token = token->next;
         i++;
     }
+    str[i] = NULL;
     return (str);
 }
 
@@ -62,18 +63,21 @@ char **path_checker(t_token *token)
 void magic(t_token *token)
 {
     char **str;
+    int ret;
 
+    ret = 1;
     str = path_checker(token);
     g_sig.pid = fork();
 
     if (g_sig.pid == 0)
     {
-        if (execve(str[0], str, NULL) == -1){
+        if (execve(str[0], str, NULL) == -1)
+        {
             _perror(str[0]); 
             printsdr(": Command not found");
         }
     }
     else
-       wait(NULL);
+       waitpid(g_sig.pid, &ret, 0);
     free_split(str);
 }
