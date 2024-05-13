@@ -163,6 +163,7 @@ int		tinypipe(t_tiny *tiny);
 void	input(t_tiny *tiny, t_token *token);
 
 
+
 /* Bin */
 char	**path_checker(t_token *token);
 char	**two_dx(t_token *start);
