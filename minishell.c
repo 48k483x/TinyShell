@@ -16,19 +16,20 @@ char *initialise_prompt(void)
 {
     char *prompt;
     char dir[200];
+    char p[200];
     char *pwd;
 
-    pwd = getenv("PWD");
+    pwd = getcwd(dir, 4096);
     while (*pwd)
     {
         if (*pwd == '/')
         {
             pwd++;
-            _strcpy(dir, pwd);
+            _strcpy(p, pwd);
         }
         pwd++;
     }
-    prompt = _strcat(dir, " \033[1;33m$ \033[0m");
+    prompt = _strcat(p, " \033[1;33m$ \033[0m");
     return (prompt);
 }
 

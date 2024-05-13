@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../../minishell.h"
 
 void	mini_exit(t_mini *mini, char **cmd)
 {

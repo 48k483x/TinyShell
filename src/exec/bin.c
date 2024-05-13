@@ -45,7 +45,7 @@ char **path_checker(t_token *token)
         str[0] = str[0];
     else
     {
-        while (env[i])
+        while (env && env[i])
         {
             path = _strcat(env[i], "/");
             path = _strcat(path, str[0]);
@@ -72,7 +72,9 @@ void magic(t_token *token, t_tiny *tiny)
 
     if (g_sig.pid == 0)
     {
-        printf("str[0]: %s\n", str[0]);
+        printf("str[0]: %s\n\n\n", str[0]);
+        // if (is_builtin(str[0]))
+        //     exec_builtin(str, tiny);
         if (execve(str[0], str, NULL) == -1)
         {
             _perror(str[0]); 

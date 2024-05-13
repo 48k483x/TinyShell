@@ -1,6 +1,6 @@
-#include "minishell.h"
+#include "../../minishell.h"
 
-static	int		nb_args(char **args)
+int		nb_args(char **args)
 {
 	int		size;
 
