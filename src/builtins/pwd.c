@@ -6,7 +6,7 @@ int		_pwd(void)
 
 	if (getcwd(cwd, PATH_MAX))
 	{
-		printsdr(cwd, 1);
+		printf("%s\n",cwd);
 		return (0);
 	}
 	else

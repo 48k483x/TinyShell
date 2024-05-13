@@ -73,9 +73,9 @@ void magic(t_token *token, t_tiny *tiny)
     if (g_sig.pid == 0)
     {
         printf("str[0]: %s\n\n\n", str[0]);
-        // if (is_builtin(str[0]))
-        //     exec_builtin(str, tiny);
-        if (execve(str[0], str, NULL) == -1)
+        if (is_builtin(str[0]) == 1)
+            exec_builtin(str, tiny);
+        else if (execve(str[0], str, NULL) == -1)
         {
             _perror(str[0]); 
             printsdr(": Command not found");
