@@ -1,5 +1,12 @@
 #include "../../minishell.h"
 
+int		is_env_char(int c)
+{
+	if (_isalnum(c) == 1 || c == '_')
+		return (1);
+	return (0);
+}
+
 int env_value_len(char *env_value)
 {
     int i;

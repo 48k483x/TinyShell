@@ -25,6 +25,8 @@
 # define STDIN 0
 # define STDOUT 1
 
+# define EXPANSION -36
+
 # define SKIP 1
 # define NOSKIP 0
 
@@ -49,6 +51,13 @@ typedef struct s_sig
 	pid_t			pid;
 }				t_sig;
 extern t_sig g_sig;
+
+typedef struct	s_expansions
+{
+	char			*new_arg;
+	int				i;
+	int				j;
+}				t_expansions;
 
 typedef struct s_token
 {
@@ -88,7 +97,7 @@ typedef struct s_tiny
 
 
 
-/* _libft functions */
+/* LIBFT functions */
 int		_strisnum(char *str);
 void 	_str_trim(char *line);
 char	*_strchr(const char *s, int c);
@@ -96,7 +105,7 @@ void	_skip_32(char *line, int *i);
 int		_strcmp(const char *s1, const char *s2);
 
 
-/* __libft functions */
+/* LIBFT functions */
 int		_strcpy(char *dest, char *src);
 char	*_strcat(char *dest, char *src);
 size_t	_strlen(const char *s);
@@ -104,14 +113,15 @@ char	*_strdup(const char *s1);
 char	*_strjoin(char *dest, char *src);
 
 
-/* Errors functions*/
+/* ERRORS functions*/
 void	*_malloc(size_t size);
 void	*_memdel(void *ptr);
 void 	_perror(char *str);
 int		printsdr(char *str);
+void	cmd_error(char *str, char *error);
 
 
-/* Split functions */
+/* SPLIT functions */
 char	**_split(char const *s, char c);
 int		_atoi(char *s);
 int		count_strings(char const *s, char c);
@@ -119,13 +129,25 @@ char	*malloc_strings(const char *s, char c);
 void	free_split(char **split);
 
 
-/* Env Functions */
+
+/* ITOA FUNCTIONS */
+int		_isdigit(int c);
+size_t	num_len(long nb);
+void	*allocation_str(size_t len);
+char	*if_zero(char *str);
+char	*_itoa(int n);
+
+
+
+/* ENV Functions */
+int		_isalnum(int c);
 int		init_env(t_tiny *tiny, char **envp);
 int		private_init_env(t_tiny *tiny, char **envp);
 
 
 
 /* ENV GET_ENV FUNCTIONS*/
+int		is_env_char(int c);
 int		env_value_len(char *env_value);
 char	*get_env_value(char *env_value);
 char	*fetch_env(char *arg, t_env *env);
@@ -140,13 +162,13 @@ int		false_lvl(char *sh_val);
 
 
 
-/* Signals Functions */
+/* SIGNALS Functions */
 void	int_handler(int signum);
 void	quit_handler(int signum);
 void	disable_echo(void);
 
 
-/* Check Syntax Functions */
+/* CHECKSYNTAX Functions */
 int		check_syntax(char *str);
 int		redirection_syntax_errors(char *str, int i);
 int		check_for_quote(char c, int quote);
@@ -174,14 +196,28 @@ int 	quotes(char *s, int index);
 
 
 
-/* Exec Bin Functions*/
+/* TOOLS PARSING EXPANSIONS FUNCTIONS */
+int		ret_size(int ret);
+int		get_var_len(const char *arg, int pos, t_env *env, int ret);
+int		arg_alloc_len(const char *arg, t_env *env, int ret);
+char	*get_var_value(const char *arg, int pos, t_env *env, int ret);
+
+
+/* PARSING EXPANSIONS FUNCTIONS */
+int		varlcpy(char *new_arg, const char *env_value, int pos);
+void 	insert_var(t_expansions *ex, char *arg, t_env *env, int ret);
+char	*expansions(char *arg, t_env *env, int ret);
+
+
+
+/* EXEC Bin Functions*/
 char	**path_checker(t_token *token);
 char	**two_dx(t_token *start);
 void 	magic(t_token *token, t_tiny *tiny);
 
 
 
-/* Exec Redir Functions*/
+/* EXEC Redir Functions*/
 void	redir(t_tiny *tiny, t_token *token, int type);
 int		tinypipe(t_tiny *tiny);
 void	input(t_tiny *tiny, t_token *token);
@@ -189,14 +225,14 @@ void	redir_her_doc(t_tiny *tiny, t_token *token);
 
 
 
-/* Exec Builitin Functions*/
+/* EXEC Builitin Functions*/
 char	*last_word(char *str);
 int 	is_builtin(char *str);
 int 	exec_builtin(char **args, t_tiny *tiny);
 
 
 
-/* _CD  Functions*/
+/* CD  Functions*/
 void	print_error(char **args);
 int		is_in_env(t_env *env, char *args);
 int		env_add(const char *value, t_env *env);
@@ -206,7 +242,7 @@ int		_cd(char **args, t_env *env);
 
 
 
-/* Echo Functions */
+/* ECHO Functions */
 int 	nb_args(char **args);
 int		_echo(char **args);
 
@@ -226,6 +262,16 @@ void 	__exit(t_tiny *tiny, char **args);
 
 /* PWD BUILTIN FUNCTION */
 int 	_pwd(void);
+
+
+
+
+/* UNSET BUILTIN FUNCTION */
+int		_strncmp(const char *s1, const char *s2, size_t n);
+size_t	env_size(char *env);
+void	free_node(t_tiny *tiny, t_env *env);
+int 		_unset(char **a, t_tiny *tiny);
+
 
 
 
@@ -252,7 +298,7 @@ int		is_types(t_token *token, char *types);
 
 
 
-/* MINISHELL.C OR THE MAIN.C, THE BEGINING OF THE PROGRAM*/
+/* MINISHELL OR THE MAIN , THE BEGINING OF THE PROGRAM*/
 void	history(char *line);
 char	*initialise_prompt(void);
 void	redir_exec(t_tiny *tiny, t_token *token);
@@ -260,7 +306,7 @@ void	exec(t_tiny *tiny);
 
 
 
-/* free */
+/* FREE */
 void	free_env(t_env *env);
 void	free_all(t_tiny *tiny);
 

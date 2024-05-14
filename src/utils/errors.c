@@ -1,4 +1,12 @@
 #include "../../minishell.h"
+
+void cmd_error(char *str, char *error)
+{
+    _perror("tiny: ");
+    _perror(str);
+    printsdr(error);
+}
+
 void _perror(char *str)
 {
     size_t i;

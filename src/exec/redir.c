@@ -45,17 +45,17 @@ void redir_her_doc(t_tiny *tiny, t_token *token)
     tiny->fdin = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
     while (1)
     {
-        line = readline(">");
+        line = readline(" > ");
         if (!line)
         {
             _memdel(line);
             break ;
         }
         if (_strcmp(line, token->str) == 0)
-            {
+        {
                 _memdel(line);
                 break ;
-            }
+        }
         write(tiny->fdin, line, _strlen(line));
         write(tiny->fdin, "\n", 1);
     }

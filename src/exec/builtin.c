@@ -48,5 +48,7 @@ int exec_builtin(char **args, t_tiny *tiny)
         return (_cd(args, tiny->env));
     if (_strcmp(lw, "env") == 0)
         return (_env(tiny->env));
+    if (_strcmp(lw, "unset") == 0)
+        return (_unset(args, tiny));
     return (0);
 }

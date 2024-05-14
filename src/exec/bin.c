@@ -64,34 +64,32 @@ void magic(t_token *token, t_tiny *tiny)
 {
     char **str;
     int ret;
+    int i;
+
     if (tiny->charge == 0)
         return ;
     ret = 1;
     str = path_checker(token);
+    i = -1;
+    while (str && str[++i])
+        str[i] = expansions(str[i], tiny->env, tiny->ret);
+    
     if (_strcmp(str[0], "exit") == 0 && has_pipe(token) == 0)
-        {
             __exit(tiny, str);
-        }
     else if (is_builtin(str[0]) == 1)
             exec_builtin(str, tiny);
     else
     {
         g_sig.pid = fork();
-
         if (g_sig.pid == 0)
         {
         if (execve(str[0], str, NULL) == -1)
-        {
-            _perror(str[0]); 
-            printsdr(": Command not found");
-        }
+            cmd_error(str[0], ": command not found");
         exit(ret);
         }
         else
             waitpid(g_sig.pid, &ret, 0);
     }
-    
-    
     free_split(str);
     _close(tiny->pipin);
 	_close(tiny->pipout);

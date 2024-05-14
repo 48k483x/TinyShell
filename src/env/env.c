@@ -1,5 +1,10 @@
 #include "../../minishell.h"
 
+int _isalnum(int c)
+{
+    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
+
 int  init_env(t_tiny *tiny, char **envp)
 {
     t_env *env; 
