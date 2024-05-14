@@ -104,6 +104,7 @@ typedef struct s_tiny
 }				t_tiny;
 
 /* functions of lib_ft utils*/
+int _strisnum(char *str);
 char	*_strcat(char *dest, char *src);
 char	**_split(char const *s, char c);
 int		_strcmp(const char *s1, const char *s2);
@@ -172,9 +173,17 @@ void 	magic(t_token *token, t_tiny *tiny);
 /* Builtins */
 int		_echo(char **args);
 int _pwd(void);
+void print_error(char **args);
+int env_add(const char *value, t_env *env);
+int		update_oldpwd(t_env *env);
+int go_to_path(int option, t_env *env);
+int		_cd(char **args, t_env *env);
+void _putendl(char *s);
+int _env(t_env *env);
 int nb_args(char **args);
 int is_builtin(char *str);
 int exec_builtin(char **args, t_tiny *tiny);
+void __exit(t_tiny *tiny, char **args);
 
 /* Tokens */
 t_token	*get_token(char *line);
@@ -189,6 +198,7 @@ int		is_type(t_token *token, int type);
 int		is_types(t_token *token, char *types);
 t_token	*prev_sep(t_token *token);
 t_token	*next_sep(t_token *token);
+int has_pipe(t_token *token);
 
 /* env */
 int		init_env(t_tiny *tiny, char **envp);

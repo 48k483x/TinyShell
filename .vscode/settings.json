@@ -95,6 +95,6 @@
     "optional": "c",
     "array": "c",
     "utility": "c"
-},
-"C_Cpp.errorSquiggles": "disabled"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

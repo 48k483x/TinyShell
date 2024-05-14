@@ -29,7 +29,9 @@ char *initialise_prompt(void)
         }
         pwd++;
     }
-    prompt = _strcat(p, " \033[1;33m$ \033[0m");
+    prompt = _strcat("\033[1;32m", p);
+    prompt = _strcat(prompt, "\033[0m");
+    prompt = _strcat(prompt, " \033[1;33m$ \033[0m");
     return (prompt);
 }
 
@@ -41,11 +43,6 @@ void redir_exec(t_tiny *tiny, t_token *token)
 
     prev = prev_sep(token);
     next = next_sep(token);
-    printf("token->str: %s\n", token->str);
-    printf("token->type: %d\n", token->type);
-    // printf("prev->type: %d\n", prev->type);
-    // printf("token->str: %s\n", token->str);
-    // printf("next->type: %d\n", next->type);
     pipe = 0;
     if (is_type(prev, TRUNC))
         redir(tiny, token, TRUNC);
@@ -60,7 +57,6 @@ void redir_exec(t_tiny *tiny, t_token *token)
     if ((is_type(prev, END) || is_type(prev, PIPE) ||!prev)
             && tiny->no_exec == 0 && pipe != 1)
         {
-            printf("token in it->str: %s\n", token->str);
             magic(token, tiny);
          } 
 
@@ -94,10 +90,10 @@ void exec(t_tiny *tiny)
 
 int main(int ac, char **av, char **env)
 {
-    if(ac != 1 || !env)
-        return (1);
+    if(ac != 1 || env == NULL || *env == NULL)
+        return (printsdr("Error: No environment found. Exiting..."));
     t_tiny tiny;
-    char *read = initialise_prompt();
+    
     (void)ac;
     (void)av;
     tiny.in = dup(STDIN);
@@ -111,6 +107,7 @@ int main(int ac, char **av, char **env)
     set_shell_level(tiny.env);
     while (tiny.exit == 0)
     {
+        char *read = initialise_prompt();
         disable_echo();
         signal(SIGINT, int_handler);
         signal(SIGQUIT, SIG_IGN);
@@ -125,7 +122,7 @@ int main(int ac, char **av, char **env)
         }
 
     }
-    _memdel(read);
+    // _memdel(read);
     free_all(&tiny);
     rl_clear_history();
 }

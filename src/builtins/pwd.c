@@ -2,9 +2,9 @@
 
 int		_pwd(void)
 {
-	char	cwd[PATH_MAX];
+	char	cwd[4096];
 
-	if (getcwd(cwd, PATH_MAX))
+	if (getcwd(cwd, 4096))
 	{
 		printf("%s\n",cwd);
 		return (0);

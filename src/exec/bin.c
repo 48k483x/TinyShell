@@ -68,25 +68,29 @@ void magic(t_token *token, t_tiny *tiny)
         return ;
     ret = 1;
     str = path_checker(token);
-    g_sig.pid = fork();
-
-    if (g_sig.pid == 0)
-    {
-        printf("str[0]: %s\n\n\n", str[0]);
-        if (is_builtin(str[0]) == 1)
+    if (_strcmp(str[0], "exit") == 0 && has_pipe(token) == 0)
+        {
+            __exit(tiny, str);
+        }
+    else if (is_builtin(str[0]) == 1)
             exec_builtin(str, tiny);
-        else if (execve(str[0], str, NULL) == -1)
+    else
+    {
+        g_sig.pid = fork();
+
+        if (g_sig.pid == 0)
+        {
+        if (execve(str[0], str, NULL) == -1)
         {
             _perror(str[0]); 
             printsdr(": Command not found");
         }
         exit(ret);
+        }
+        else
+            waitpid(g_sig.pid, &ret, 0);
     }
-    else
-    {
-        waitpid(g_sig.pid, &ret, 0);
-        // reset_std(tiny);
-    }
+    
     
     free_split(str);
     _close(tiny->pipin);

@@ -6,7 +6,7 @@ char *last_word(char *str)
     int i;
 
     i = 0;
-    last = NULL;
+    last = str;
     while (str[i])
     {
         if (str[i] == '/')
@@ -19,7 +19,6 @@ char *last_word(char *str)
 int is_builtin(char *str)
 {
     char *lw = last_word(str);
-    printf("im in is_builtin -> str: %s\n", lw);
     if (!lw)
         return (0);
     if (_strcmp(lw, "echo") == 0)
@@ -45,5 +44,9 @@ int exec_builtin(char **args, t_tiny *tiny)
         return (_echo(args));
     if (_strcmp(lw, "pwd") == 0)
         return (_pwd());
+    if (_strcmp(lw, "cd") == 0)
+        return (_cd(args, tiny->env));
+    if (_strcmp(lw, "env") == 0)
+        return (_env(tiny->env));
     return (0);
 }

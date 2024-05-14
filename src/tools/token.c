@@ -25,4 +25,15 @@ t_token *next_run(t_token *token)
                 token = token->next;
     }
     return (token);
-}//  ls | cat -e
+}
+
+int		has_pipe(t_token *token)
+{
+	while (token && is_type(token, END) == 0)
+	{
+		if (is_type(token, PIPE))
+			return (1);
+		token = token->next;
+	}
+	return (0);
+}

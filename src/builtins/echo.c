@@ -14,7 +14,6 @@ int				_echo(char **args)
 {
 	int		i;
 	int		n_option;
-	printf("im in echo\n");
 	i = 1;
 	n_option = 0;
 	if (nb_args(args) > 1)
@@ -26,13 +25,13 @@ int				_echo(char **args)
 		}
 		while (args[i])
 		{
-			printf("%s\n", args[i]);
+			printf("%s", args[i]);
 			if (args[i + 1] && args[i][0] != '\0')
 				write(1, " ", 1);
 			i++;
 		}
 	}
 	if (n_option == 0)
-		write(1, "\n", 1);
+		printf("\n");
 	return (0);
 }

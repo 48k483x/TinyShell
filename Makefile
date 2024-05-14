@@ -5,7 +5,8 @@ SRC = minishell.c ./src/utils/split.c ./src/utils/ft_libft.c \
 			./src/free/free.c ./src/parse/parse.c ./src/parse/tokens.c \
 			./src/tools/token.c ./src/tools/type.c ./src/exec/redir.c \
 			./src/exec/bin.c ./src/exec/builtin.c \
-			./src/builtins/echo.c ./src/builtins/pwd.c
+			./src/builtins/echo.c ./src/builtins/pwd.c ./src/builtins/cd.c \
+			./src/builtins/env.c ./src/builtins/exit.c
 
 OBJ = $(SRC:.c=.o)
 NAME = minishell
