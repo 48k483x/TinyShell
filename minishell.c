@@ -30,10 +30,10 @@ char *initialise_prompt(void)
         pwd++;
     }
     prompt = _strcat(getenv("USER"), "@");
-    prompt = _strcat(prompt, hostname); // Add hostname
+    prompt = _strcat(prompt, hostname);
     prompt = _strcat(prompt, ":");
-    prompt = _strcat(prompt, p); // Add current directory
-    prompt = _strcat(prompt, "$ "); // Add $ symbol
+    prompt = _strcat(prompt, p);
+    prompt = _strcat(prompt, "$ ");
     return (prompt);
 }
 
@@ -50,6 +50,8 @@ void redir_exec(t_tiny *tiny, t_token *token)
         redir(tiny, token, TRUNC);
     else if (is_type(prev, APPEND))
         redir(tiny, token, APPEND);
+    else if (is_type(prev, APPEND_OPPOSITE))
+        redir_her_doc(tiny, token);
     else if (is_type(prev, INPUT))
         input(tiny, token);
     else if (is_type(prev, PIPE))

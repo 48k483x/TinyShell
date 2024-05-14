@@ -37,6 +37,28 @@ void    input(t_tiny *tiny, t_token *token)
     dup2(tiny->fdin, STDIN);
 }
 
+void redir_her_doc(t_tiny *tiny, t_token *token)
+{
+    char *line;
+
+    _close(tiny->fdin);
+    tiny->fdin = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    while (1)
+    {
+        line = readline(">");
+        if (!line)
+            break ;
+        if (_strcmp(line, token->str) == 0)
+            break ;
+        write(tiny->fdin, line, _strlen(line));
+        write(tiny->fdin, "\n", 1);
+    }
+    close(tiny->fdin); 
+    tiny->fdin = open(".heredoc", O_RDONLY);
+    dup2(tiny->fdin, STDIN_FILENO);
+    unlink(".heredoc");
+}
+
 int tinypipe(t_tiny *tiny)
 {
     int fd[2];

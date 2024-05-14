@@ -185,6 +185,7 @@ void 	magic(t_token *token, t_tiny *tiny);
 void	redir(t_tiny *tiny, t_token *token, int type);
 int		tinypipe(t_tiny *tiny);
 void	input(t_tiny *tiny, t_token *token);
+void	redir_her_doc(t_tiny *tiny, t_token *token);
 
 
 

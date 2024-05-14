@@ -33,8 +33,8 @@ void token_type(t_token *token, int sep)
         token->type = APPEND;
     else if (_strcmp(token->str, "<<") == 0 && sep == 0)
         token->type = APPEND_OPPOSITE;
-    else if (token->prev && token->prev->type == APPEND_OPPOSITE && sep == 0)
-        token->type = DELIM;
+    // else if (token->prev && token->prev->type == APPEND_OPPOSITE && sep == 0)
+    //     token->type = DELIM;
     else if (_strcmp(token->str, "<") == 0 && sep == 0)
         token->type = INPUT;
     else if (token->prev == NULL || token->prev->type >= TRUNC)
