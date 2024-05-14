@@ -19,3 +19,22 @@ int printsdr(char *str)
     write(2, "\n", 1);
     return 1;
 }
+void *_memdel(void *ptr)
+{
+    if (ptr != NULL)
+    {
+        free(ptr);
+        ptr = NULL;
+    }
+    return NULL;
+}
+
+void *_malloc(size_t size)
+{
+    void *ptr;
+
+    ptr = malloc(size);
+    if (!ptr)
+        return (NULL);
+    return (ptr);
+}

@@ -2,22 +2,22 @@
 
 t_sig g_sig;
 
-char *get_name(void)
-{
-    return (getenv("USER"));
-}
 
 void history(char *line)
 {
     if (line && *line)
         add_history(line);
 }
+
 char *initialise_prompt(void)
 {
     char *prompt;
     char dir[200];
     char p[200];
     char *pwd;
+    char hostname[1024];
+
+    gethostname(hostname, 1024);
 
     pwd = getcwd(dir, 4096);
     while (*pwd)
@@ -29,9 +29,11 @@ char *initialise_prompt(void)
         }
         pwd++;
     }
-    prompt = _strcat("\033[1;32m", p);
-    prompt = _strcat(prompt, "\033[0m");
-    prompt = _strcat(prompt, " \033[1;33m$ \033[0m");
+    prompt = _strcat(getenv("USER"), "@");
+    prompt = _strcat(prompt, hostname); // Add hostname
+    prompt = _strcat(prompt, ":");
+    prompt = _strcat(prompt, p); // Add current directory
+    prompt = _strcat(prompt, "$ "); // Add $ symbol
     return (prompt);
 }
 
@@ -56,9 +58,7 @@ void redir_exec(t_tiny *tiny, t_token *token)
         redir_exec(tiny, next->next);
     if ((is_type(prev, END) || is_type(prev, PIPE) ||!prev)
             && tiny->no_exec == 0 && pipe != 1)
-        {
             magic(token, tiny);
-         } 
 
 }
 

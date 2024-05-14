@@ -105,7 +105,6 @@ int				_cd(char **args, t_env *env)
 	else
 	{
 		update_oldpwd(env);
-		printf("args[1]: %s\n", args[1]);
 		cd_ret = chdir(args[1]);
 		if (cd_ret < 0)
 			cd_ret *= -1;
