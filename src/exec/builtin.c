@@ -50,5 +50,7 @@ int exec_builtin(char **args, t_tiny *tiny)
         return (_env(tiny->env));
     if (_strcmp(lw, "unset") == 0)
         return (_unset(args, tiny));
+    if (_strcmp(lw, "export") == 0)
+        return (_export(args, tiny->env, tiny->private_env));
     return (0);
 }

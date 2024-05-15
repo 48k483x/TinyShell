@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-static int	print_error(int error, const char *arg)
+int	print_error(int error, const char *arg)
 {
 	int		i;
 
@@ -11,10 +11,10 @@ static int	print_error(int error, const char *arg)
 	i = 0;
 	while (arg[i] && (arg[i] != '=' || error == -3))
 	{
-		write(STDERR, &arg[i], 1);
+		write(2, &arg[i], 1);
 		i++;
 	}
-	write(STDERR, "\n", 1);
+	write(2, "\n", 1);
 	return (0);
 }
 

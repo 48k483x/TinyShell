@@ -141,6 +141,8 @@ char	*_itoa(int n);
 
 /* ENV Functions */
 int		_isalnum(int c);
+size_t	size_env(t_env *lst);
+char	*env_to_str(t_env *lst);
 int		init_env(t_tiny *tiny, char **envp);
 int		private_init_env(t_tiny *tiny, char **envp);
 
@@ -148,6 +150,7 @@ int		private_init_env(t_tiny *tiny, char **envp);
 
 /* ENV GET_ENV FUNCTIONS*/
 int		is_env_char(int c);
+int		is_valid_env(const char *env);
 int		env_value_len(char *env_value);
 char	*get_env_value(char *env_value);
 char	*fetch_env(char *arg, t_env *env);
@@ -233,7 +236,6 @@ int 	exec_builtin(char **args, t_tiny *tiny);
 
 
 /* CD  Functions*/
-void	print_error(char **args);
 int		is_in_env(t_env *env, char *args);
 int		env_add(const char *value, t_env *env);
 int		update_oldpwd(t_env *env);
@@ -270,7 +272,25 @@ int 	_pwd(void);
 int		_strncmp(const char *s1, const char *s2, size_t n);
 size_t	env_size(char *env);
 void	free_node(t_tiny *tiny, t_env *env);
-int 		_unset(char **a, t_tiny *tiny);
+int 	_unset(char **a, t_tiny *tiny);
+
+
+
+/* TOOLS SORT ENV FOR EXPORT BUILTINS */
+int		str_env_len(char **env);
+void	sort_env(char **tab, int env_len);
+void	print_sorted_env(t_env *env);
+
+
+
+
+
+/* EXPORT BUILTIN FUNCTION */
+int		_export(char **args, t_env *env, t_env *secret);
+
+
+
+
 
 
 
