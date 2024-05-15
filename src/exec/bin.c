@@ -65,6 +65,8 @@ void magic(t_token *token, t_tiny *tiny)
     char **str;
     int ret;
     int i;
+    char *path;
+    char **env;
 
     if (tiny->charge == 0)
         return ;
@@ -81,10 +83,14 @@ void magic(t_token *token, t_tiny *tiny)
     else
     {
         g_sig.pid = fork();
+        path = env_to_str(tiny->env);
+        env = _split(path, '\n');
         if (g_sig.pid == 0)
         {
-        if (execve(str[0], str, NULL) == -1)
+        if (execve(str[0], str, env) == -1)
             cmd_error(str[0], ": command not found");
+        _memdel(path);
+        free_split(env);
         exit(ret);
         }
         else
