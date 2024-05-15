@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void		print_error(char **args)
+void		__error(char **args)
 {
 	_perror("cd: ");
 	_perror(args[1]);
@@ -109,7 +109,7 @@ int				_cd(char **args, t_env *env)
 		if (cd_ret < 0)
 			cd_ret *= -1;
 		if (cd_ret != 0)
-			print_error(args);
+			__error(args);
 	}
 	return (cd_ret);
 }

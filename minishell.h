@@ -278,7 +278,7 @@ int 	_unset(char **a, t_tiny *tiny);
 
 /* TOOLS SORT ENV FOR EXPORT BUILTINS */
 int		str_env_len(char **env);
-void	sort_env(char **tab, int env_len);
+void	sort_env(char **s, int env_len);
 void	print_sorted_env(t_env *env);
 
 

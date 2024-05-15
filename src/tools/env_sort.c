@@ -10,24 +10,24 @@ int			str_env_len(char **env)
 	return (i);
 }
 
-void		sort_env(char **tab, int env_len)
+void		sort_env(char **s, int env_len)
 {
 	int		ordered;
 	int		i;
 	char	*tmp;
 
 	ordered = 0;
-	while (tab && ordered == 0)
+	while (s && ordered == 0)
 	{
 		ordered = 1;
 		i = 0;
 		while (i < env_len - 1)
 		{
-			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
+			if (_strcmp(s[i], s[i + 1]) > 0)
 			{
-				tmp = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = tmp;
+				tmp = s[i];
+				s[i] = s[i + 1];
+				s[i + 1] = tmp;
 				ordered = 0;
 			}
 			i++;
@@ -39,20 +39,20 @@ void		sort_env(char **tab, int env_len)
 void		print_sorted_env(t_env *env)
 {
 	int		i;
-	char	**tab;
+	char	**s;
 	char	*str_env;
 
 	str_env = env_to_str(env);
 	// printf("str_env: %s\n", str_env);
-	tab = ft_split(str_env, '\n');
-	ft_memdel(str_env);
-	sort_env(tab, str_env_len(tab));
+	s = _split(str_env, '\n');
+	_memdel(str_env);
+	sort_env(s, str_env_len(s));
 	i = 0;
-	while (tab[i])
+	while (s[i])
 	{
-		ft_putstr("declare -x ");
-		ft_putendl(tab[i]);
+		printf("declare -x ");
+		printf("%s\n", s[i]);
 		i++;
 	}
-	free_tab(tab);
+	free_split(s);
 }
