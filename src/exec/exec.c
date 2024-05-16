@@ -7,7 +7,7 @@ int			error_message(char *path)
 	int	ret;
 
 	fd = open(path, O_WRONLY);
-	folder = opendir(path);j
+	folder = opendir(path);
 	if (_strchr(path, '/') == NULL)
 		cmd_error(path, ": command not found");
 	else if (fd == -1 && folder == NULL)
