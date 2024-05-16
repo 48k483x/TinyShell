@@ -142,5 +142,7 @@ int	check_syntax(char *s)
 	_str_trim(s);
 	if (pipe_and_semi_errors(s) || check_quote_errors(s) || check_redir_errors(s))
 		return (1);
+	if (s[_strlen(s) - 1] == '|' || s[_strlen(s) - 1] == ';')
+		return (printsdr("tiny: syntax error near unexpected token `newline'"));
 	return (0);
 }
