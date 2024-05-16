@@ -25,13 +25,24 @@ void disable_echo(void)
 }
 void    int_handler(int signum)
 {
-    if (signum == SIGINT)
+    (void)signum;
+    if (g_sig.pid == 0)
     {
         printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+        g_sig.exit_status = 1;
     }
+    else
+    {
+        printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+        g_sig.exit_status = 130;
+    }
+    g_sig.sigint = 1;
 }
 
 void quit_handler(int signum)
