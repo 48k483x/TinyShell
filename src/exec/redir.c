@@ -3,8 +3,8 @@
 void redir(t_tiny *tiny, t_token *token, int type)
 {
     // printf("hadda li f redir token->next->str: %s\n", token->str);
+    signal(SIGINT, int_handler);
     _close(tiny->fdout);
-    
     if (type == TRUNC)
         tiny->fdout = open(token->str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
     else if (type == APPEND)
@@ -23,6 +23,7 @@ void redir(t_tiny *tiny, t_token *token, int type)
 
 void    input(t_tiny *tiny, t_token *token)
 {
+    
     _close(tiny->fdin);
     tiny->fdin = open(token->str, O_RDONLY, 0644);
     if (tiny->fdin == -1)
@@ -59,7 +60,7 @@ void redir_her_doc(t_tiny *tiny, t_token *token)
         write(tiny->fdin, line, _strlen(line));
         write(tiny->fdin, "\n", 1);
     }
-    close(tiny->fdin); 
+    close(tiny->fdin);
     tiny->fdin = open(".heredoc", O_RDONLY);
     dup2(tiny->fdin, STDIN_FILENO);
     unlink(".heredoc");

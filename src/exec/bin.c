@@ -41,7 +41,7 @@ char **path_checker(t_token *token)
     str = two_dx(token);
     i = 0;
     env = _split(getenv("PATH"), ':');
-    if (*str != NULL && access(str[0], X_OK) == 0)
+    if (access(str[0], X_OK) == 0)
         str[0] = str[0];
     else
     {

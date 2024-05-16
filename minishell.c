@@ -109,10 +109,11 @@ int main(int ac, char **av, char **env)
     set_shell_level(tiny.env);
     while (tiny.exit == 0)
     {
-        char *read = initialise_prompt();
         disable_echo();
+        sig_init();
         signal(SIGINT, int_handler);
         signal(SIGQUIT, SIG_IGN);
+        char *read = initialise_prompt();
         tiny.line = readline(read);
         if (!tiny.line || _strlen(tiny.line) == 0)
             continue;

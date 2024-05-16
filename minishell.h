@@ -171,6 +171,7 @@ int		false_lvl(char *sh_val);
 
 
 /* SIGNALS Functions */
+void	sig_init(void);
 void	int_handler(int signum);
 void	quit_handler(int signum);
 void	disable_echo(void);
