@@ -60,7 +60,7 @@ void redir_exec(t_tiny *tiny, t_token *token)
         redir_exec(tiny, next->next);
     if ((is_type(prev, END) || is_type(prev, PIPE) ||!prev)
             && tiny->no_exec == 0 && pipe != 1)
-            magic(token, tiny);
+            exec_cmd(tiny, token);
 
 }
 

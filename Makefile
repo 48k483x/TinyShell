@@ -8,7 +8,7 @@ SRC = minishell.c ./src/utils/split.c ./src/utils/_libft.c ./src/utils/__libft.c
 			./src/builtins/echo.c ./src/builtins/pwd.c ./src/builtins/cd.c \
 			./src/builtins/env.c ./src/builtins/exit.c ./src/utils/itoa.c \
 			./src/tools/expensions.c ./src/parse/expensions.c ./src/builtins/unset.c \
-			./src/builtins/export.c ./src/tools/env_sort.c
+			./src/builtins/export.c ./src/tools/env_sort.c ./src/exec/exec.c
 			
 
 OBJ = $(SRC:.c=.o)

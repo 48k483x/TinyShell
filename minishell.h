@@ -24,8 +24,13 @@
 # define BUFFER_SIZE 4096
 # define STDIN 0
 # define STDOUT 1
+# define STDERR 2
 
 # define EXPANSION -36
+
+# define UNKNOWN_COMMAND 127
+# define IS_DIRECTORY 126
+
 
 # define SKIP 1
 # define NOSKIP 0
@@ -216,7 +221,13 @@ char	*expansions(char *arg, t_env *env, int ret);
 /* EXEC Bin Functions*/
 char	**path_checker(t_token *token);
 char	**two_dx(t_token *start);
-void 	magic(t_token *token, t_tiny *tiny);
+
+
+
+/* EXEC CMD FUNCTIONS */
+int 	error_message(char *str);
+int 	exec_bin(char **str, t_tiny *tiny);
+void	exec_cmd(t_tiny *tiny, t_token *token);
 
 
 
