@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void		__error(char **args)
+void	__error(char **args)
 {
 	_perror("cd: ");
 	_perror(args[1]);
@@ -13,27 +13,7 @@ void		__error(char **args)
 	}
 }
 
-int			is_in_env(t_env *env, char *args)
-{
-	char	var_name[BUFFER_SIZE];
-	char	env_name[BUFFER_SIZE];
-
-	get_env_name(var_name, args);
-	while (env && env->next)
-	{
-		get_env_name(env_name, env->value);
-		if (_strcmp(var_name, env_name) == 0)
-		{
-			_memdel(env->value);
-			env->value = _strdup(args);
-			return (1);
-		}
-		env = env->next;
-	}
-	return (0);
-}
-
-int			env_add(const char *value, t_env *env)
+int	env_add(const char *value, t_env *env)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -53,15 +33,15 @@ int			env_add(const char *value, t_env *env)
 	return (0);
 }
 
-
- int		update_oldpwd(t_env *env)
+int	update_oldpwd(t_env *env)
 {
 	char	cwd[4096];
 	char	*oldpwd;
 
 	if (getcwd(cwd, 4096) == NULL)
 		return (0);
-	if (!(oldpwd = _strjoin("OLDPWD=", cwd)))
+	oldpwd = _strjoin("OLDPWD=", cwd);
+	if (oldpwd == NULL)
 		return (0);
 	if (is_in_env(env, oldpwd) == 0)
 		env_add(oldpwd, env);
@@ -69,7 +49,7 @@ int			env_add(const char *value, t_env *env)
 	return (0);
 }
 
-int		go_to_path(int option, t_env *env)
+int	go_to_path(int option, t_env *env)
 {
 	int		ret;
 	char	*env_path;
@@ -90,11 +70,10 @@ int		go_to_path(int option, t_env *env)
 		update_oldpwd(env);
 	}
 	ret = chdir(env_path);
-	// _memdel(env_path);
 	return (ret);
 }
 
-int				_cd(char **args, t_env *env)
+int	_cd(char **args, t_env *env)
 {
 	int		cd_ret;
 

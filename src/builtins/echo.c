@@ -1,8 +1,8 @@
 #include "../../minishell.h"
 
-int		nb_args(char **args)
+int	nb_args(char **args)
 {
-	int		size;
+	int	size;
 
 	size = 0;
 	while (args[size])
@@ -10,10 +10,11 @@ int		nb_args(char **args)
 	return (size);
 }
 
-int				_echo(char **args)
+int	_echo(char **args)
 {
-	int		i;
-	int		n_option;
+	int	i;
+	int	n_option;
+
 	i = 1;
 	n_option = 0;
 	if (nb_args(args) > 1)

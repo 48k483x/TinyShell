@@ -76,13 +76,13 @@ int main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     init(&tiny, env);
-    read = initialise_prompt();
     while (tiny.exit == 0)
     {
         disable_echo();
         sig_init();
         signal(SIGINT, int_handler);
         signal(SIGQUIT, quit_handler);
+        read = initialise_prompt();
         tiny.line = readline(read);
         if (tiny.line == NULL)
             break ;

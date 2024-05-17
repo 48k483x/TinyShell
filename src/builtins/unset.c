@@ -1,7 +1,6 @@
 #include "../../minishell.h"
 
-
-int _strncmp(const char *s1, const char *s2, size_t n)
+int	_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
@@ -27,7 +26,7 @@ size_t	env_size(char *env)
 	return (i);
 }
 
-void		free_node(t_tiny *tiny, t_env *env)
+void	free_node(t_tiny *tiny, t_env *env)
 {
 	if (tiny->env == env && env->next == NULL)
 	{
@@ -40,17 +39,18 @@ void		free_node(t_tiny *tiny, t_env *env)
 	_memdel(env);
 }
 
-int				_unset(char **a, t_tiny *tiny)
+int	_unset(char **a, t_tiny *tiny)
 {
 	t_env	*env;
 	t_env	*tmp;
-	printf("im here\n");
+
 	env = tiny->env;
 	if (!(a[1]))
 		return (0);
 	if (_strncmp(a[1], env->value, env_size(env->value)) == 0)
 	{
-		tiny->env = (env->next) ? env->next : tiny->env;
+		if (env->next != NULL)
+			tiny->env = env->next;
 		free_node(tiny, env);
 		return (0);
 	}

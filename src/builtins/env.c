@@ -1,8 +1,8 @@
 #include "../../minishell.h"
 
-void _putendl(char *s)
+void	_putendl(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (s == NULL)
@@ -12,7 +12,7 @@ void _putendl(char *s)
 	write(1, "\n", 1);
 }
 
-int		_env(t_env *env)
+int	_env(t_env *env)
 {
 	while (env && env->next != NULL)
 	{

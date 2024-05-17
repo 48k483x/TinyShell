@@ -1,12 +1,12 @@
 #include "../../minishell.h"
 
-int		_pwd(void)
+int	_pwd(void)
 {
 	char	cwd[4096];
 
 	if (getcwd(cwd, 4096))
 	{
-		printf("%s\n",cwd);
+		printf("%s\n", cwd);
 		return (0);
 	}
 	else

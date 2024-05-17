@@ -2,7 +2,7 @@
 
 int	print_error(int error, const char *arg)
 {
-	int		i;
+	int	i;
 
 	if (error == -1)
 		_perror("export: not valid in this context: " );
@@ -18,11 +18,39 @@ int	print_error(int error, const char *arg)
 	return (0);
 }
 
-
-int			_export(char **args, t_env *env, t_env *secret)
+int	is_in_env(t_env *env, char *args)
 {
-	int		new_env;
-	int		error_ret;
+	char	var_name[BUFFER_SIZE];
+	char	env_name[BUFFER_SIZE];
+
+	get_env_name(var_name, args);
+	while (env && env->next)
+	{
+		get_env_name(env_name, env->value);
+		if (_strcmp(var_name, env_name) == 0)
+		{
+			_memdel(env->value);
+			env->value = _strdup(args);
+			return (1);
+		}
+		env = env->next;
+	}
+	return (0);
+}
+
+int	err_ret_value(int error, t_env *env, char **args)
+{
+	if (error == 2)
+		return (1);
+	else
+		return (is_in_env(env, args[1]));
+	return (0);
+}
+
+int	_export(char **args, t_env *env, t_env *secret)
+{
+	int	new_env;
+	int	error_ret;
 
 	new_env = 0;
 	if (!args[1])
@@ -37,7 +65,7 @@ int			_export(char **args, t_env *env, t_env *secret)
 			error_ret = -3;
 		if (error_ret <= 0)
 			return (print_error(error_ret, args[1]));
-		new_env = error_ret == 2 ? 1 : is_in_env(env, args[1]);
+		new_env = err_ret_value(error_ret, env, args);
 		if (new_env == 0)
 		{
 			if (error_ret == 1)
