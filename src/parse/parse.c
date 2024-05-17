@@ -63,7 +63,9 @@ char *space_line(char *line)
     new = spacing(line);
     while (new  && line[i])
     {
-        if (line[i] == '$' && i && line[i - 1] != '\\')
+        if (line[i] == '$' && (i - 1) && line[i - 1] == '\'')
+            new[j++] = line[i++];
+        else if (line[i] == '$' && i && line[i - 1] != '\\')
             new[j++] = (char)(-line[i++]);
         else if (quotes(line, i) == 0 && is_operator(line, i))
         {
@@ -80,7 +82,6 @@ char *space_line(char *line)
     _memdel(line);
     return (new);
 }
-
 void parse(t_tiny *tiny)
 {
 	tiny->line = space_line(tiny->line);

@@ -84,6 +84,10 @@ void exec(t_tiny *tiny)
         reset_fds(tiny);
         waitpid(-1, &status, 0);
 		status = WEXITSTATUS(status);
+        if (tiny->last == 0)
+            tiny->ret = status;
+        if (tiny->parent == 0)
+            exit(tiny->ret);
         tiny->no_exec = 0;
         token = token->next;
         token = next_run(token);
@@ -128,4 +132,5 @@ int main(int ac, char **av, char **env)
     // _memdel(read);
     free_all(&tiny);
     rl_clear_history();
+    return (tiny.ret);
 }

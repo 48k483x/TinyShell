@@ -1,4 +1,4 @@
-FLAGS = -g -Wall -Wextra -Werror 
+FLAGS = -g -Wall -Wextra -Werror #-fsanitize=leak 
 SRC = minishell.c ./src/utils/split.c ./src/utils/_libft.c ./src/utils/__libft.c \
 		./src/utils/errors.c ./src/utils/signals.c \
 			./src/parse/check_syntax.c ./src/tools/fd.c ./src/env/env.c ./src/env/get_env.c ./src/env/shlvl.c \

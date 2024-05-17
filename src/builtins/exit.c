@@ -18,7 +18,10 @@ void	__exit(t_tiny *tiny, char **cmd)
 		printsdr(": numeric argument required");
 	}
 	else if (cmd[1])
+	{
+		printf ("ret = %d\n", _atoi(cmd[1]));
 		tiny->ret = _atoi(cmd[1]);
+	}
 	else
 		tiny->ret = 0;
 }

@@ -57,6 +57,7 @@ char **path_checker(t_token *token)
             i++;
         }
     }
+    free_split(env);
     return (str);
 }
 

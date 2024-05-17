@@ -43,7 +43,7 @@ char			*expansions(char *arg, t_env *env, int ret)
 	ex.j = 0;
 	while (ex.i < new_arg_len && arg[ex.j])
 	{
-		while (arg[ex.j] == EXPANSION)
+		while (arg[ex.j] == EXPANSION )
 		{
 			ex.j++;
 			if ((arg[ex.j] == '\0' || _isalnum(arg[ex.j]) == 0)

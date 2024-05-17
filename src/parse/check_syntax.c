@@ -104,7 +104,7 @@ int	check_pipe_errors(char *s)
 			while (s[i] == ' ')
 				i++;
 			if (s[i] == '|')
-				return (printsdr("tiny: syntax error near unexpected token `|'"));
+				return (printsdr("tiny: symantax error near unexpected token `|'"));
 		}
 		if (s[i] == '|' && inside)
 			return (printsdr("tiny: syntax error near unexpected token `|'"));
