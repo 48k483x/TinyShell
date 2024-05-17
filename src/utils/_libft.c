@@ -1,8 +1,8 @@
 #include "../../minishell.h"
 
-int _strisnum(char *str)
+int	_strisnum(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -18,51 +18,51 @@ int _strisnum(char *str)
 	return (1);
 }
 
-void _str_trim(char *line)
+void	_str_trim(char *line)
 {
-    int i;
-    int j;
-    int len;
+	int	i;
+	int	j;
+	int	len;
 
-    i = 0;
-    j = 0;
-    len =_strlen(line);
-    while (line[i] == ' ' || line[i] == '\t')
-        i++;
-    while (line[len - 1] == ' ' || line[len - 1] == '\t')
-        len--;
-    while (i < len)
-    {
-        line[j] = line[i];
-        i++;
-        j++;
-    }
-    line[j] = '\0';
+	i = 0;
+	j = 0;
+	len = _strlen(line);
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	while (line[len - 1] == ' ' || line[len - 1] == '\t')
+		len--;
+	while (i < len)
+	{
+		line[j] = line[i];
+		i++;
+		j++;
+	}
+	line[j] = '\0';
 }
 
-char *_strchr(const char *s, int c)
+char	*_strchr(const char *s, int c)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!s)
-        return (NULL);
-    while (s[i])
-    {
-        if (s[i] == c)
-            return ((char *)&s[i]);
-        i++;
-    }
-    return (NULL);
+	i = 0;
+	if (!s)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] == c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	return (NULL);
 }
 
-void _skip_32(char *line, int *i)
+void	_skip_32(char *line, int *i)
 {
-    while (line[*i] == ' ')
-        (*i)++;
+	while (line[*i] == ' ')
+		(*i)++;
 }
 
-int _strcmp(const char *s1, const char *s2)
+int	_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
 

@@ -1,59 +1,46 @@
 #include "../../minishell.h"
 
-void disable_echo(void)
+void	disable_echo(void)
 {
-    // This function disables echo in the terminal. This is useful when we want
-    // to read input from the user without displaying it on the screen.
+	struct termios	term;
 
-    // The termios structure is used to store the terminal attributes. The
-    // tcgetattr function gets the current terminal attributes and stores them in
-    // the termios structure.
-
-    // The c_lflag field of the termios structure contains local flags that control
-    // various terminal settings. The ECHO flag controls whether input characters
-    // are echoed to the terminal.
-
-    // The &= ~ operator clears the ECHO flag, disabling echo.
-
-    // The tcsetattr function sets the terminal attributes to the values stored in
-    // the termios structure.
-    struct termios term;
-
-    tcgetattr(STDIN_FILENO, &term);
-    term.c_lflag &= ~(ECHOCTL);
-    tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
+
 void	int_handler(int signum)
 {
-    int	status;
+	int	status;
 
-    (void)signum;
-    if (g_sig.pid != 0)
-    {
-        waitpid(g_sig.pid, &status, 0);
-        g_sig.exit_status = 130;
-    }
-    else
-    {
-        printf("\n");
-        rl_on_new_line();
-        rl_replace_line("", 0);
-        rl_redisplay();
-        g_sig.exit_status = 1;
-    }
-    g_sig.sigint = 1;
+	(void)signum;
+	if (g_sig.pid != 0)
+	{
+		waitpid(g_sig.pid, &status, 0);
+		g_sig.exit_status = 130;
+	}
+	else
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_sig.exit_status = 1;
+	}
+	g_sig.sigint = 1;
 }
 
-void quit_handler(int signum)
+void	quit_handler(int signum)
 {
-    if (signum == SIGQUIT)
-    {
-        return ;
+	if (signum == SIGQUIT)
+	{
+		return ;
 		// rl_on_new_line();
 		// rl_replace_line("", 0);
 		// rl_redisplay();
-    }
+	}
 }
+
 void	sig_init(void)
 {
 	g_sig.sigint = 0;
@@ -61,4 +48,3 @@ void	sig_init(void)
 	g_sig.pid = 0;
 	g_sig.exit_status = 0;
 }
-
