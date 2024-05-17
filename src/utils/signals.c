@@ -32,13 +32,23 @@ void	int_handler(int signum)
 
 void	quit_handler(int signum)
 {
-	if (signum == SIGQUIT)
+	char	*nbr;
+
+	nbr = _itoa(signum);
+	if (g_sig.pid != 0)
 	{
-		return ;
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
+		_perror("Quit: ");
+		printsdr(nbr);
+		g_sig.exit_status = 131;
+		g_sig.sigquit = 1;
 	}
+	else
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	_memdel(nbr);
 }
 
 void	sig_init(void)

@@ -116,7 +116,7 @@ int main(int ac, char **av, char **env)
         disable_echo();
         sig_init();
         signal(SIGINT, int_handler);
-        signal(SIGQUIT, SIG_IGN);
+        signal(SIGQUIT, quit_handler);
         char *read = initialise_prompt();
         tiny.line = readline(read);
         if (!tiny.line || _strlen(tiny.line) == 0)
