@@ -69,11 +69,7 @@ char	*space_line(char *line)
 			new[j++] = (char)(-line[i++]);
 		else if (quotes(line, i) == 0 && is_operator(line, i))
 		{
-			new[j++] = ' ';
-			new[j++] = line[i++];
-			if (quotes(line, i) == 0 && (line[i] == '<' || line[i] == '>'))
-				new[j++] = line[i++];
-			new[j++] = ' ';
+			space_line_helper(line, new, &i, &j);
 		}
 		else
 			new[j++] = line[i++];

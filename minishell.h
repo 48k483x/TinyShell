@@ -213,6 +213,7 @@ char	*get_var_value(const char *arg, int pos, t_env *env, int ret);
 
 
 /* PARSING EXPANSIONS FUNCTIONS */
+void	space_line_helper(char *line, char *new, int *i, int *j);
 int		varlcpy(char *new_arg, const char *env_value, int pos);
 void 	insert_var(t_expansions *ex, char *arg, t_env *env, int ret);
 char	*expansions(char *arg, t_env *env, int ret);

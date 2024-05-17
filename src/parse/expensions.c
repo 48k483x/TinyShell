@@ -1,5 +1,14 @@
 #include "../../minishell.h"
 
+void	space_line_helper(char *line, char *new, int *i, int *j)
+{
+	new[(*j)++] = ' ';
+	new[(*j)++] = line[(*i)++];
+	if (quotes(line, (*i)) == 0 && (line[(*i)] == '<' || line[(*i)] == '>'))
+		new[(*j)++] = line[(*i)++];
+	new[(*j)++] = ' ';
+}
+
 int	varlcpy(char *new_arg, const char *env_value, int pos)
 {
 	int	i;
