@@ -9,34 +9,6 @@ void history(char *line)
         add_history(line);
 }
 
-char *initialise_prompt(void)
-{
-    char *prompt;
-    char dir[200];
-    char p[200];
-    char *pwd;
-    char hostname[1024];
-
-    gethostname(hostname, 1024);
-
-    pwd = getcwd(dir, 4096);
-    while (*pwd)
-    {
-        if (*pwd == '/')
-        {
-            pwd++;
-            _strcpy(p, pwd);
-        }
-        pwd++;
-    }
-    prompt = _strcat(getenv("USER"), "@");
-    prompt = _strcat(prompt, hostname);
-    prompt = _strcat(prompt, ":");
-    prompt = _strcat(prompt, p);
-    prompt = _strcat(prompt, "$ ");
-    return (prompt);
-}
-
 void redir_exec(t_tiny *tiny, t_token *token)
 {
     t_token *prev;
@@ -96,29 +68,24 @@ void exec(t_tiny *tiny)
 
 int main(int ac, char **av, char **env)
 {
+    t_tiny tiny;
+    char *read;
+
     if(ac != 1 || env == NULL || *env == NULL)
         return (printsdr("Error: No environment found. Exiting..."));
-    t_tiny tiny;
-    
     (void)ac;
     (void)av;
-    tiny.in = dup(STDIN);
-    tiny.out = dup(STDOUT);
-    tiny.exit = 0;
-    tiny.ret = 0;
-    tiny.no_exec = 0;
-    reset_fds(&tiny);
-    init_env(&tiny, env);
-    private_init_env(&tiny,env);
-    set_shell_level(tiny.env);
+    init(tiny, env);
+    read = initialise_prompt();
     while (tiny.exit == 0)
     {
         disable_echo();
         sig_init();
         signal(SIGINT, int_handler);
         signal(SIGQUIT, quit_handler);
-        char *read = initialise_prompt();
         tiny.line = readline(read);
+        if (tiny.line == NULL)
+            break ;
         if (!tiny.line || _strlen(tiny.line) == 0)
             continue;
         history(tiny.line);
@@ -127,10 +94,9 @@ int main(int ac, char **av, char **env)
             parse(&tiny);
             exec(&tiny);
         }
-
     }
-    // _memdel(read);
     free_all(&tiny);
     rl_clear_history();
+    printsdr("exit");
     return (tiny.ret);
 }

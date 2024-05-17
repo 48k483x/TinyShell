@@ -336,6 +336,7 @@ void	history(char *line);
 char	*initialise_prompt(void);
 void	redir_exec(t_tiny *tiny, t_token *token);
 void	exec(t_tiny *tiny);
+void	init(t_tiny tiny, char **env);
 
 
 

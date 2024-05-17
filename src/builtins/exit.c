@@ -4,7 +4,6 @@
 void	__exit(t_tiny *tiny, char **cmd)
 {
 	tiny->exit = 1;
-	_perror("exit\n");
 	if (cmd[1] && cmd[2])
 	{
 		tiny->ret = 1;

@@ -9,6 +9,7 @@ SRC = minishell.c ./src/utils/split.c ./src/utils/_libft.c ./src/utils/__libft.c
 			./src/builtins/env.c ./src/builtins/exit.c ./src/utils/itoa.c \
 			./src/tools/expensions.c ./src/parse/expensions.c ./src/builtins/unset.c \
 			./src/builtins/export.c ./src/tools/env_sort.c ./src/exec/exec.c ./src/parse/check_syntax_0.c \
+			./src/tools/init.c
 			
 
 OBJ = $(SRC:.c=.o)
