@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/abkabex/Desktop/TinyShell/utils",
-      "program": "/home/abkabex/Desktop/TinyShell/utils/build/Debug/outDebug",
+      "cwd": "/home/abkabex/Desktop/TinyShell",
+      "program": "/home/abkabex/Desktop/TinyShell/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

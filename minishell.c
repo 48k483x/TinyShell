@@ -75,7 +75,7 @@ int main(int ac, char **av, char **env)
         return (printsdr("Error: No environment found. Exiting..."));
     (void)ac;
     (void)av;
-    init(tiny, env);
+    init(&tiny, env);
     read = initialise_prompt();
     while (tiny.exit == 0)
     {

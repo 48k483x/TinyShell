@@ -28,15 +28,15 @@ char *initialise_prompt(void)
     return (prompt);
 }
 
-void init(t_tiny tiny, char **env)
+void init(t_tiny *tiny, char **env)
 {
-    tiny.in = dup(STDIN);
-    tiny.out = dup(STDOUT);
-    tiny.exit = 0;
-    tiny.ret = 0;
-    tiny.no_exec = 0;
-    reset_fds(&tiny);
-    init_env(&tiny, env);
-    private_init_env(&tiny,env);
-    set_shell_level(tiny.env);
+    tiny->in = dup(STDIN);
+    tiny->out = dup(STDOUT);
+    tiny->exit = 0;
+    tiny->ret = 0;
+    tiny->no_exec = 0;
+    reset_fds(tiny);
+    init_env(tiny, env);
+    private_init_env(tiny, env);
+    set_shell_level(tiny->env);
 }
