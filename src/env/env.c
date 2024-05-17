@@ -1,11 +1,11 @@
 #include "../../minishell.h"
 
-int _isalnum(int c)
+int	_isalnum(int c)
 {
-    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
 
-size_t			size_env(t_env *lst)
+size_t	size_env(t_env *lst)
 {
 	size_t	lst_len;
 
@@ -22,7 +22,7 @@ size_t			size_env(t_env *lst)
 	return (lst_len);
 }
 
-char			*env_to_str(t_env *lst)
+char	*env_to_str(t_env *lst)
 {
 	char	*env;
 	int		i;
@@ -50,48 +50,48 @@ char			*env_to_str(t_env *lst)
 	return (env);
 }
 
-int  init_env(t_tiny *tiny, char **envp)
+int	init_env(t_tiny *tiny, char **envp)
 {
-    t_env *env; 
-    t_env *new;
-    int i;
+	t_env	*env;
+	t_env	*new;
+	int		i;
 
-    env = _malloc(sizeof(t_env));
-    env->value = _strdup(envp[0]);
-    env->next = NULL;
-    tiny->env = env;
-    i = 1;
-    while (envp && envp[0] && envp[i])
-    {
-        new = _malloc(sizeof(t_env));
-        new->value = _strdup(envp[i]);
-        new->next = NULL;
-        env->next = new;
-        env = new;
-        i++;
-    }
-    return (0);
+	env = _malloc(sizeof(t_env));
+	env->value = _strdup(envp[0]);
+	env->next = NULL;
+	tiny->env = env;
+	i = 1;
+	while (envp && envp[0] && envp[i])
+	{
+		new = _malloc(sizeof(t_env));
+		new->value = _strdup(envp[i]);
+		new->next = NULL;
+		env->next = new;
+		env = new;
+		i++;
+	}
+	return (0);
 }
 
-int private_init_env(t_tiny *tiny, char **envp)
+int	private_init_env(t_tiny *tiny, char **envp)
 {
-    t_env *env; 
-    t_env *new;
-    int i;
+	t_env	*env;
+	t_env	*new;
+	int		i;
 
-    env = _malloc(sizeof(t_env));
-    env->value = _strdup(envp[0]);
-    env->next = NULL;
-    tiny->private_env = env;
-    i = 1;
-    while (envp && envp[0] && envp[i])
-    {
-        new = _malloc(sizeof(t_env));
-        new->value = _strdup(envp[i]);
-        new->next = NULL;
-        env->next = new;
-        env = new;
-        i++;
-    }
-    return (0);
+	env = _malloc(sizeof(t_env));
+	env->value = _strdup(envp[0]);
+	env->next = NULL;
+	tiny->private_env = env;
+	i = 1;
+	while (envp && envp[0] && envp[i])
+	{
+		new = _malloc(sizeof(t_env));
+		new->value = _strdup(envp[i]);
+		new->next = NULL;
+		env->next = new;
+		env = new;
+		i++;
+	}
+	return (0);
 }
