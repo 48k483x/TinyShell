@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-int		ret_size(int ret)
+int	ret_size(int ret)
 {
 	char	*tmp;
 	int		ret_len;
@@ -11,7 +11,7 @@ int		ret_size(int ret)
 	return (ret_len);
 }
 
-int		get_var_len(const char *arg, int pos, t_env *env, int ret)
+int	get_var_len(const char *arg, int pos, t_env *env, int ret)
 {
 	char	var_name[BUFFER_SIZE];
 	char	*var_value;
@@ -35,10 +35,10 @@ int		get_var_len(const char *arg, int pos, t_env *env, int ret)
 	return (i);
 }
 
-int		arg_alloc_len(const char *arg, t_env *env, int ret)
+int	arg_alloc_len(const char *arg, t_env *env, int ret)
 {
-	int		i;
-	int		size;
+	int	i;
+	int	size;
 
 	i = -1;
 	size = 0;

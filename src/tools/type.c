@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-int		is_type(t_token *token, int type)
+int	is_type(t_token *token, int type)
 {
 	if (token && token->type == type)
 		return (1);
@@ -8,7 +8,7 @@ int		is_type(t_token *token, int type)
 		return (0);
 }
 
-int		is_types(t_token *token, char *types)
+int	is_types(t_token *token, char *types)
 {
 	if (_strchr(types, ' ') && is_type(token, EMPTY))
 		return (1);
@@ -22,10 +22,10 @@ int		is_types(t_token *token, char *types)
 		return (1);
 	else if (_strchr(types, 'I') && is_type(token, INPUT))
 		return (1);
-    else if (_strchr(types, 'W') && is_type(token, APPEND_OPPOSITE))
-        return (1);
-    else if (_strchr(types, 'D') && is_type(token, DELIM))
-        return (1);
+	else if (_strchr(types, 'W') && is_type(token, APPEND_OPPOSITE))
+		return (1);
+	else if (_strchr(types, 'D') && is_type(token, DELIM))
+		return (1);
 	else if (_strchr(types, 'P') && is_type(token, PIPE))
 		return (1);
 	else if (_strchr(types, 'E') && is_type(token, END))

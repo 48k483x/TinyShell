@@ -1,8 +1,8 @@
 #include "../../minishell.h"
 
-int			str_env_len(char **env)
+int	str_env_len(char **env)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -10,7 +10,7 @@ int			str_env_len(char **env)
 	return (i);
 }
 
-void		sort_env(char **s, int env_len)
+void	sort_env(char **s, int env_len)
 {
 	int		ordered;
 	int		i;
@@ -36,14 +36,13 @@ void		sort_env(char **s, int env_len)
 	}
 }
 
-void		print_sorted_env(t_env *env)
+void	print_sorted_env(t_env *env)
 {
 	int		i;
 	char	**s;
 	char	*str_env;
 
 	str_env = env_to_str(env);
-	// printf("str_env: %s\n", str_env);
 	s = _split(str_env, '\n');
 	_memdel(str_env);
 	sort_env(s, str_env_len(s));
