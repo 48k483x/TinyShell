@@ -18,4 +18,6 @@ void	free_all(t_tiny *tiny)
 {
 	free_env(tiny->env);
 	free_env(tiny->private_env);
+	rl_clear_history();
+	printsdr("exit");
 }

@@ -54,7 +54,7 @@ typedef struct s_sig
 }				t_sig;
 extern t_sig	g_sig;
 
-typedef struct	s_expansions
+typedef struct s_expansions
 {
 	char			*new_arg;
 	int				i;
@@ -189,7 +189,7 @@ char	*get_var_value(const char *arg, int pos, t_env *env, int ret);
 /* PARSING EXPANSIONS FUNCTIONS */
 void	space_line_helper(char *line, char *new, int *i, int *j);
 int		varlcpy(char *new_arg, const char *env_value, int pos);
-void 	insert_var(t_expansions *ex, char *arg, t_env *env, int ret);
+void	insert_var(t_expansions *ex, char *arg, t_env *env, int ret);
 char	*expansions(char *arg, t_env *env, int ret);
 
 /* EXEC Bin Functions*/
