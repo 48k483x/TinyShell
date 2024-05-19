@@ -17,12 +17,12 @@ void	redir_exec(t_tiny *tiny, t_token *token)
 	prev = prev_sep(token);
 	next = next_sep(token);
 	pipe = 0;
-	if (is_type(prev, TRUNC))
-		redir(tiny, token, TRUNC);
+	if (is_type(prev, APPEND_OPPOSITE))
+		redir_her_doc(tiny, token);
 	else if (is_type(prev, APPEND))
 		redir(tiny, token, APPEND);
-	else if (is_type(prev, APPEND_OPPOSITE))
-		redir_her_doc(tiny, token);
+	else if (is_type(prev, TRUNC))
+		redir(tiny, token, TRUNC);
 	else if (is_type(prev, INPUT))
 		input(tiny, token);
 	else if (is_type(prev, PIPE))
@@ -95,6 +95,7 @@ int	main(int ac, char **av, char **env)
 		{
 			parse(&tiny);
 			exec(&tiny);
+			_memdel(read);
 		}
 	}
 	free_all(&tiny);
